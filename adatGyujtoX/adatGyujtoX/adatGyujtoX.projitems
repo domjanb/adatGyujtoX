@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{B2C79D0B-8A6E-44D8-AB25-6F5789B23E30}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>adatGyujtoX</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\BaseItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogazon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogdata.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogkerdiv.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogparam.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDatabaseConnection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)TodoItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TodoItemDatabase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)myDataBase\UsersDataAccess.cs" />
+  </ItemGroup>
+</Project>
