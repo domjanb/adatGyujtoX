@@ -153,9 +153,10 @@ namespace adatGyujtoX
 
                     nyert = false;
                     Debug.WriteLine("aa");
-                    //Debug.WriteLine(i);
+                    Console.WriteLine("hellololllll");
+                    Debug.WriteLine(i);
                     var ho = Length(BTrim(valaszok[i].Text));
-                    //Debug.WriteLine(ho);
+                    Debug.WriteLine(ho);
                 }
             }
 
