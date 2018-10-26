@@ -19,19 +19,6 @@ namespace adatGyujtoX
             
             InitializeComponent();
 
-
-            UsersDataAccess azonadat = new UsersDataAccess();
-            int regisztrácioDarab=azonadat.GetCogAzon().Count();
-            if (regisztrácioDarab == 1)
-            {
-            }
-            else
-            {
-                /// ha nem egy ember van ide regisztrálva, hanem több, vagyegym, akkor delete table és a reg.xaml meghívása
-                azonadat.DeleteCogAzonAll();
-            }
-
-            ///
             /// Milyen a net? 
             /// 0 nincs
             /// 1 all
@@ -41,6 +28,25 @@ namespace adatGyujtoX
             ///
             //var milyenANet = 0;
             int netTipus = milyenANet();
+
+            UsersDataAccess azonadat = new UsersDataAccess();
+            int regisztrácioDarab=azonadat.GetCogAzon().Count();
+            if (regisztrácioDarab == 1)
+            {
+
+            }
+            else
+            {
+                /// ha nem egy ember van ide regisztrálva, hanem több, vagyegym, akkor delete table és a reg.xaml meghívása
+                azonadat.DeleteCogAzonAll();
+                if (netTipus == 2)
+                {
+                    //ide jön a http reg
+                }
+            }
+
+            ///
+            
             
             //SQLiteConnection conn = new SQLiteConnection();
 
