@@ -18,7 +18,18 @@ namespace adatGyujtoX
         {
             
             InitializeComponent();
-            
+
+
+            UsersDataAccess azonadat = new UsersDataAccess();
+            int regisztrácioDarab=azonadat.GetCogAzon().Count();
+            if (regisztrácioDarab == 1)
+            {
+            }
+            else
+            {
+                /// ha nem egy ember van ide regisztrálva, hanem több, vagyegym, akkor delete table és a reg.xaml meghívása
+                azonadat.DeleteCogAzonAll();
+            }
 
             ///
             /// Milyen a net? 
@@ -30,10 +41,10 @@ namespace adatGyujtoX
             ///
             //var milyenANet = 0;
             int netTipus = milyenANet();
-            Console.Write(net_van_e);
+            
             //SQLiteConnection conn = new SQLiteConnection();
 
-            UsersDataAccess azonadat = new UsersDataAccess();
+            //UsersDataAccess azonadat = new UsersDataAccess();
             Console.Write("aaaa1");
             var idd=azonadat.SaveCogAzon(new Cogazon {
                 uemail = "1",

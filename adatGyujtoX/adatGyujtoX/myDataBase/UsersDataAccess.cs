@@ -76,7 +76,7 @@ namespace adatGyujtoX
         {
             lock (collisionLock)
             {
-                return database.Query<Cogazon>("Select * from item").AsEnumerable();
+                return database.Query<Cogazon>("Select * from Cogazon").AsEnumerable();
                 
             }
         }
@@ -109,6 +109,16 @@ namespace adatGyujtoX
             }
             this.CogUser.Remove(cogAzonAdat);
             return id;
+        }
+        public void DeleteCogAzonAll()
+        {
+            lock (collisionLock)
+            {
+                database.DeleteAll<Cogazon>();
+            }
+                
+            
+            
         }
     }
 }
