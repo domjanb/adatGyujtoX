@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\BaseItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogazon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogdata.cs" />

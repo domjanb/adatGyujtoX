@@ -10,12 +10,14 @@ using Plugin.Connectivity;
 using Xamarin.Forms.Internals;
 using System.Diagnostics;
 
+
 namespace adatGyujtoX
 {
     public partial class MainPage : ContentPage
     {
         
-        public Entry[] valaszok = new Entry[5];
+        
+        List<Entry> valaszok = new List<Entry>();
         //String[] vs;
 
         Button reggomb;
@@ -23,6 +25,7 @@ namespace adatGyujtoX
         {
 
             InitializeComponent();
+            
 
             var myLayout = new StackLayout();
 
@@ -90,26 +93,29 @@ namespace adatGyujtoX
                     var nameC = new Label { Text = "Name:", HorizontalTextAlignment = TextAlignment.End, VerticalTextAlignment = TextAlignment.Center };
                     var name = new Entry { Placeholder = "Name:" };
                     name.TextChanged += OnEntryTextChanged;
-                    //name.PropertyChanging=
                     var name2C = new Label { Text = "Surename:", HorizontalTextAlignment = TextAlignment.End };
                     var name2 = new Entry { Placeholder = "Surename:" };
+                    name2.TextChanged += OnEntryTextChanged;
                     var codeC = new Label { Text = "Code:", HorizontalTextAlignment = TextAlignment.End };
                     var code = new Entry { Placeholder = "Code:" ,Keyboard=Keyboard.Numeric};
+                    code.TextChanged += OnEntryTextChanged;
                     var passC = new Label { Text = "Password:", HorizontalTextAlignment = TextAlignment.End };
                     var pass = new Entry { Placeholder = "Password:",IsPassword=true };
+                    pass.TextChanged += OnEntryTextChanged;
                     var emilC = new Label { Text = "E-mail:", HorizontalTextAlignment = TextAlignment.End };
                     var emil = new Entry { Placeholder = "E-mail:" };
+                    emil.TextChanged += OnEntryTextChanged;
                     var regButton = new Button { Text = "Registration:" };
                     regButton.IsVisible = false;
-
+                    regButton.Clicked += regButtonClick;
                     reggomb = regButton;
-                    valaszok[0] = name;
-                    valaszok[1] = name2;
-                    valaszok[2] = code;
-                    valaszok[3] = pass;
-                    valaszok[4] = emil;
-
-                    //vs.in
+                    
+                    valaszok.Add( name);
+                    valaszok.Add( name2);
+                    valaszok.Add( code);
+                    valaszok.Add(pass);
+                    valaszok.Add(emil);
+                    
                     regForm.Children.Add(zeroC, 0, 0);
                     regForm.Children.Add(nameC, 1, 0);
                     regForm.Children.Add(name, 2, 0);
@@ -138,25 +144,37 @@ namespace adatGyujtoX
             Content = myLayout;
         }
 
+        private void regButtonClick(object sender, EventArgs e)
+        {
+            DisplayAlert("Figyelem", "Ide jon a reggisszt", "ok", "megsem");
+        }
+
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
+            
             //
             var oldText = e.OldTextValue;
             var newText = e.NewTextValue;
 
             var inputBox = (Entry)sender;
             Boolean nyert = true;
-            for (var i=0; i < valaszok.Length; i++)
+            for (var i=0; i < valaszok.Count ; i++)
             {
+                if (Length(valaszok[i].Text) > 0)
+                {
+                    Trace.WriteLine(valaszok[i].Text);
+                    
+
+                }
                 if (Length(BTrim(valaszok[i].Text)) == 0)
                 {
 
                     nyert = false;
-                    Debug.WriteLine("aa");
-                    Console.WriteLine("hellololllll");
-                    Debug.WriteLine(i);
-                    var ho = Length(BTrim(valaszok[i].Text));
-                    Debug.WriteLine(ho);
+                    //Debug.WriteLine("aa");
+                    //Console.WriteLine("hellololllll");
+                    //Debug.WriteLine(i);
+                    //var ho = Length(BTrim(valaszok[i].Text));
+                    //Debug.WriteLine(ho);
                 }
             }
 
@@ -173,7 +191,7 @@ namespace adatGyujtoX
 
 
         }
-
+        
         private int Length(string v)
         {
             int vissza = 0;
@@ -201,7 +219,7 @@ namespace adatGyujtoX
 
             return vissza;
         }
-
+        
         private static void bazsiInit(StackLayout myLayout, UsersDataAccess azonadat)
         {
             ///
