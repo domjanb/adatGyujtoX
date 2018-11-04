@@ -9,7 +9,8 @@ using Xamarin.Forms;
 using Plugin.Connectivity;
 using Xamarin.Forms.Internals;
 using System.Diagnostics;
-
+using adatGyujtoX.Data;
+using RestSharp.Portable;
 
 namespace adatGyujtoX
 {
@@ -147,6 +148,23 @@ namespace adatGyujtoX
         private void regButtonClick(object sender, EventArgs e)
         {
             DisplayAlert("Figyelem", "Ide jon a reggisszt", "ok", "megsem");
+            var name = valaszok[0].Text;
+            var name2 = valaszok[1].Text;
+            var code = valaszok[2].Text;
+            var pass = valaszok[3].Text;
+            var emil = valaszok[4].Text;
+
+            var rs = new Data.RestService();
+            rs.name = name;
+            rs.name2 = name2;
+            rs.code = code;
+            rs.pass = pass;
+            rs.emil = emil;
+            RestApiModell vissza =rs.ReggiFutAsync();
+
+            //var valasz = new RestApiModell();
+            var aa = "aa";
+
         }
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
