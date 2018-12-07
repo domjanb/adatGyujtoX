@@ -11,6 +11,8 @@ using Xamarin.Forms.Internals;
 using System.Diagnostics;
 using adatGyujtoX.Data;
 using RestSharp.Portable;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace adatGyujtoX
 {
@@ -22,6 +24,8 @@ namespace adatGyujtoX
         //String[] vs;
 
         Button reggomb;
+        private RestApiModell vissza;
+
         public MainPage()
         {
 
@@ -154,19 +158,74 @@ namespace adatGyujtoX
             var pass = valaszok[3].Text;
             var emil = valaszok[4].Text;
 
-            var rs = new Data.RestService();
+            /*var rs = new Data.RestService();
             rs.name = name;
             rs.name2 = name2;
             rs.code = code;
             rs.pass = pass;
             rs.emil = emil;
-            RestApiModell vissza =rs.ReggiFutAsync();
+            RestApiModell vissza =rs.ReggiFutAsync();*/
+            //var vissza = rs.RefreshDataAsync();
+
 
             //var valasz = new RestApiModell();
+
+
+            RestApiModell x =   GetJSON();
+            /*RestApiModell ObjContactList = new RestApiModell();
+            if (contactsJson != "")
+            {
+                //Converting JSON Array Objects into generic list  
+                ObjContactList = JsonConvert.DeserializeObject<RestApiModell>(contactsJson);
+            }-*/
             var aa = "aa";
 
         }
+        public string name { get; internal set; }
+        public string name2 { get; internal set; }
+        public string code { get; internal set; }
+        public string pass { get; internal set; }
+        public string emil { get; internal set; }
+        public async Task<RestApiModell> GetJSON()
+        {
+            //RestApiModell vissza ;
+            //Check network status   
+            if (NetworkCheck.IsInternet())
+            {
+                
+                var content = new StringContent(
+                JsonConvert.SerializeObject(new
+                {
+                    user_name = name,
+                    user_surname = name2,
+                    user_kod = code,
+                    user_password = pass,
+                    user_email = emil
 
+                }));
+                var uri = new Uri(string.Format("http://qnr.cognative.hu/cogsurv/regist_ios2.php", content));
+
+                var client = new System.Net.Http.HttpClient();
+                var response = await client.GetAsync(uri);
+                String contactsJson = await response.Content.ReadAsStringAsync();
+                if (contactsJson != "")
+                {
+                    //Converting JSON Array Objects into generic list  
+                    RestApiModell vissza = JsonConvert.DeserializeObject<RestApiModell>(contactsJson);
+                }
+                //vissza = contactsJson;
+
+                //Binding listview with server response    
+                //listviewConacts.ItemsSource = ObjContactList.contacts;
+            }
+            else
+            {
+                await DisplayAlert("JSONParsing", "No network is available.", "Ok");
+            }
+            //Hide loader after server response    
+            //ProgressLoader.IsVisible = false;
+            return vissza;
+        }
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             
