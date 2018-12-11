@@ -10,9 +10,9 @@ using Plugin.Connectivity;
 using Xamarin.Forms.Internals;
 using System.Diagnostics;
 using adatGyujtoX.Data;
-using RestSharp.Portable;
 using System.Net.Http;
 using Newtonsoft.Json;
+using adatGyujtoX.myDataBase;
 
 namespace adatGyujtoX
 {
@@ -112,7 +112,19 @@ namespace adatGyujtoX
                     emil.TextChanged += OnEntryTextChanged;
                     var regButton = new Button { Text = "Registration:" };
                     regButton.IsVisible = false;
-                    regButton.Clicked += regButtonClick;
+                    //regButton.Clicked +=await regButtonClickAsync;
+                    regButton.Clicked += async (sender, e) =>
+                    {
+                        User user = new User();
+                        user.user_name = valaszok[0].Text;
+                        user.user_surnamed = valaszok[1].Text;
+                        user.user_kod = valaszok[2].Text;
+                        user.user_password = valaszok[3].Text;
+                        user.user_emil = valaszok[4].Text;
+                        var rs = new Data.RestService();
+                        Token vlasz = await rs.Reggi(user);
+                        var a = "";
+                    }; 
                     reggomb = regButton;
                     
                     valaszok.Add( name);
@@ -149,14 +161,20 @@ namespace adatGyujtoX
             Content = myLayout;
         }
 
-        private void regButtonClick(object sender, EventArgs e)
+        private async Task regButtonClickAsync(object sender, EventArgs e)
         {
+
             DisplayAlert("Figyelem", "Ide jon a reggisszt", "ok", "megsem");
-            var name = valaszok[0].Text;
+            
+
+
+            /*var name = valaszok[0].Text;
             var name2 = valaszok[1].Text;
             var code = valaszok[2].Text;
             var pass = valaszok[3].Text;
             var emil = valaszok[4].Text;
+            var rs = new Data.RestService();
+            RestApiModell vissza = await rs.RefreshDataAsync();*/
 
             /*var rs = new Data.RestService();
             rs.name = name;
@@ -171,7 +189,7 @@ namespace adatGyujtoX
             //var valasz = new RestApiModell();
 
 
-            RestApiModell x =   GetJSON();
+            //RestApiModell x =   GetJSON();
             /*RestApiModell ObjContactList = new RestApiModell();
             if (contactsJson != "")
             {
@@ -186,46 +204,7 @@ namespace adatGyujtoX
         public string code { get; internal set; }
         public string pass { get; internal set; }
         public string emil { get; internal set; }
-        public async Task<RestApiModell> GetJSON()
-        {
-            //RestApiModell vissza ;
-            //Check network status   
-            if (NetworkCheck.IsInternet())
-            {
-                
-                var content = new StringContent(
-                JsonConvert.SerializeObject(new
-                {
-                    user_name = name,
-                    user_surname = name2,
-                    user_kod = code,
-                    user_password = pass,
-                    user_email = emil
-
-                }));
-                var uri = new Uri(string.Format("http://qnr.cognative.hu/cogsurv/regist_ios2.php", content));
-
-                var client = new System.Net.Http.HttpClient();
-                var response = await client.GetAsync(uri);
-                String contactsJson = await response.Content.ReadAsStringAsync();
-                if (contactsJson != "")
-                {
-                    //Converting JSON Array Objects into generic list  
-                    RestApiModell vissza = JsonConvert.DeserializeObject<RestApiModell>(contactsJson);
-                }
-                //vissza = contactsJson;
-
-                //Binding listview with server response    
-                //listviewConacts.ItemsSource = ObjContactList.contacts;
-            }
-            else
-            {
-                await DisplayAlert("JSONParsing", "No network is available.", "Ok");
-            }
-            //Hide loader after server response    
-            //ProgressLoader.IsVisible = false;
-            return vissza;
-        }
+        
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             
