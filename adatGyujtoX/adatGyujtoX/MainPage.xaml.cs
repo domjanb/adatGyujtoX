@@ -125,6 +125,29 @@ namespace adatGyujtoX
                         vissza = await rs.Reggi(user);
                         if (vissza.error)
                         {
+                            name.IsVisible = false;
+                            name2.IsVisible = false;
+                            emil.IsVisible = false;
+                            code.IsVisible = false;
+                            pass.IsVisible = false;
+                            nameC.IsVisible = false;
+                            name2C.IsVisible = false;
+                            emilC.IsVisible = false;
+                            //codeC.IsVisible = false;
+                            //passC.IsVisible = false;
+                            //regButton.IsVisible = false;
+                            
+                            myLayout.Children.Remove(regForm);
+
+                            var regForm2 = new Grid();
+                            regForm2.HorizontalOptions = LayoutOptions.Center;
+                            //regForm2.BackgroundColor = Color.LightGray;
+                            regForm2.Padding = 5;
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                            regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
                             for (int i=0; i<vissza.darab;i++)
                             {
                                 var ReferenceDate = new DateTime(1970, 1, 1);
@@ -145,16 +168,17 @@ namespace adatGyujtoX
 
 
                                 });
-                                name.IsVisible = false;
-                                name2.IsVisible = false;
-                                emil.IsVisible = false;
-                                code.IsVisible = false;
-                                pass.IsVisible = false;
-                                regButton.IsVisible = false;
-                                gombEllAll();
-                               
+                                var buttonM = new Button();
+                                buttonM.Text = vissza.kerdivadat[i].kerdiv1_title;
+                                regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                                regForm2.Children.Add(buttonM, 1, i);
+
+
+
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
+                            myLayout.Children.Add(regForm2);
+
                         }
                         //var aa = vissza.getError();
                         //var bb = vissza.getMessage();
