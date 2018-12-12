@@ -25,7 +25,7 @@ namespace adatGyujtoX
 
         Button reggomb;
         private RestApiModell vissza;
-
+        private Button[] buttons;
         public MainPage()
         {
 
@@ -129,37 +129,8 @@ namespace adatGyujtoX
                             {
                                 var ReferenceDate = new DateTime(1970, 1, 1);
                                 DateTime CacheUtcTime = ReferenceDate.AddSeconds(Convert.ToInt64(vissza.kerdivadat[i].kerdiv2_le));
-                                Debug.WriteLine(CacheUtcTime);
-                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_nev);
-                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_ver);
-                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_title);
-                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].kerdivtip));
-                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].proj_id));
-                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_par));
-                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_par_ertek));
-                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_proj));
-                                Debug.WriteLine("kiiras ok");
-                                Cogkerdiv abababb = new Cogkerdiv();
-                                Debug.WriteLine("kiiras ok1a");
-                                abababb.kerdiv1nev = "leoka";
-                                Debug.WriteLine("kiiras ok1aa");
-                                abababb.kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev;
-                                Debug.WriteLine("kiiras ok1b");
-                                abababb.kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev;
-                                Debug.WriteLine("kiiras ok1c");
-                                abababb.kerdiv1ver = vissza.kerdivadat[i].kerdiv1_ver;
-                                abababb.kerdivtitle = vissza.kerdivadat[i].kerdiv1_title;
-                                abababb.kerdivtip = Convert.ToInt16(vissza.kerdivadat[i].kerdivtip);
-                                abababb.projid = Convert.ToInt16(vissza.kerdivadat[i].proj_id);
-                                abababb.fuggv_par = Convert.ToInt16(vissza.kerdivadat[i].fugg_par);
-                                abababb.fuggv_par_ertek = Convert.ToInt16(vissza.kerdivadat[i].fugg_par_ertek);
-                                abababb.fuggv_poj = Convert.ToInt16(vissza.kerdivadat[i].fugg_proj);
-                                abababb.kerdivdate = CacheUtcTime;
-                                Debug.WriteLine("eddig jo");
 
-                                var idd2 = adatBazis.SaveCogDataKerdiv(abababb);
-                                Debug.WriteLine("eddig jo2");
-
+                                adatBazis.DeleteCogAzonAll();
                                 var idd = adatBazis.SaveCogDataKerdiv(new Cogkerdiv
                                 {
                                     kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev,
@@ -174,6 +145,13 @@ namespace adatGyujtoX
 
 
                                 });
+                                name.IsVisible = false;
+                                name2.IsVisible = false;
+                                emil.IsVisible = false;
+                                code.IsVisible = false;
+                                pass.IsVisible = false;
+                                regButton.IsVisible = false;
+                                gombEllAll();
                                
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
@@ -220,6 +198,11 @@ namespace adatGyujtoX
             bazsiInit(myLayout, adatBazis);
 
             Content = myLayout;
+        }
+
+        private void gombEllAll()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task regButtonClickAsync(object sender, EventArgs e)
