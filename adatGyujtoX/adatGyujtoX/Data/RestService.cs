@@ -21,7 +21,7 @@ namespace adatGyujtoX.Data
         public RestService()
         {
 
-            var client2 = new HttpClient();
+            client2 = new HttpClient();
             client2.MaxResponseContentBufferSize = 256000;
             client2.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
             
@@ -34,7 +34,7 @@ namespace adatGyujtoX.Data
 
             
         }
-        public async Task<Token> Reggi(User user)
+        public async Task<RestApiModell> Reggi(User user)
         {
             var postData = new List<KeyValuePair<string, string>>();
             postData.Add(new KeyValuePair<string, string>("user_name", user.user_name));
@@ -48,24 +48,26 @@ namespace adatGyujtoX.Data
             return response;
 
         }
-        public async Task<T> PostResponseReggi<T>(string uri,FormUrlEncodedContent content) where T: class
+        public async Task<RestApiModell> PostResponseReggi<T>(string uri,FormUrlEncodedContent content) where T: class
         {
-            Debug.WriteLine("kodeaaaaaa " );
+            //Debug.WriteLine("kodeaaaaaa " );
             try
             {
-                Debug.WriteLine("kodeaaaaaa2 ");
-                Debug.WriteLine(client2);
-                Debug.WriteLine(uri);
-                Debug.WriteLine(content);
+                //Debug.WriteLine("kodeaaaaaa2 ");
+                //Debug.WriteLine(client2);
+                //Debug.WriteLine(uri);
+                //Debug.WriteLine(content);
                 //var response = await client2.GetStringAsync(uri);
                 var response = await client2.PostAsync(uri, content);
-                Debug.WriteLine("kode " + Convert.ToString(response));
+                //Debug.WriteLine("kode " + Convert.ToString(response));
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var jsonResult = response.Content.ReadAsStringAsync().Result;
+                    Debug.WriteLine(jsonResult);
                     try
                     {
-                        var responseObject = JsonConvert.DeserializeObject<T>(jsonResult);
+                        var responseObject = JsonConvert.DeserializeObject<RestApiModell>(jsonResult);
+                        Debug.WriteLine(responseObject);
                         return responseObject;
                     }
                     catch

@@ -60,8 +60,8 @@ namespace adatGyujtoX
             //var milyenANet = 0;
             int netTipus = milyenANet();
 
-            UsersDataAccess azonadat = new UsersDataAccess();
-            int regisztrácioDarab = azonadat.GetCogAzon().Count();
+            UsersDataAccess adatBazis = new UsersDataAccess();
+            int regisztrácioDarab = adatBazis.GetCogAzon().Count();
             if (regisztrácioDarab == 1)
             {
 
@@ -70,7 +70,7 @@ namespace adatGyujtoX
             {
 
                 /// ha nem egy ember van ide regisztrálva, hanem több, vagyegym, akkor delete table és a reg.xaml meghívása
-                azonadat.DeleteCogAzonAll();
+                adatBazis.DeleteCogAzonAll();
 
                 //regform
                 if (netTipus != 0)
@@ -122,7 +122,68 @@ namespace adatGyujtoX
                         user.user_password = valaszok[3].Text;
                         user.user_emil = valaszok[4].Text;
                         var rs = new Data.RestService();
-                        Token vlasz = await rs.Reggi(user);
+                        vissza = await rs.Reggi(user);
+                        if (vissza.error)
+                        {
+                            for (int i=0; i<vissza.darab;i++)
+                            {
+                                var ReferenceDate = new DateTime(1970, 1, 1);
+                                DateTime CacheUtcTime = ReferenceDate.AddSeconds(Convert.ToInt64(vissza.kerdivadat[i].kerdiv2_le));
+                                Debug.WriteLine(CacheUtcTime);
+                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_nev);
+                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_ver);
+                                Debug.WriteLine(vissza.kerdivadat[i].kerdiv1_title);
+                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].kerdivtip));
+                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].proj_id));
+                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_par));
+                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_par_ertek));
+                                Debug.WriteLine(Convert.ToInt16(vissza.kerdivadat[i].fugg_proj));
+                                Debug.WriteLine("kiiras ok");
+                                Cogkerdiv abababb = new Cogkerdiv();
+                                Debug.WriteLine("kiiras ok1a");
+                                abababb.kerdiv1nev = "leoka";
+                                Debug.WriteLine("kiiras ok1aa");
+                                abababb.kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev;
+                                Debug.WriteLine("kiiras ok1b");
+                                abababb.kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev;
+                                Debug.WriteLine("kiiras ok1c");
+                                abababb.kerdiv1ver = vissza.kerdivadat[i].kerdiv1_ver;
+                                abababb.kerdivtitle = vissza.kerdivadat[i].kerdiv1_title;
+                                abababb.kerdivtip = Convert.ToInt16(vissza.kerdivadat[i].kerdivtip);
+                                abababb.projid = Convert.ToInt16(vissza.kerdivadat[i].proj_id);
+                                abababb.fuggv_par = Convert.ToInt16(vissza.kerdivadat[i].fugg_par);
+                                abababb.fuggv_par_ertek = Convert.ToInt16(vissza.kerdivadat[i].fugg_par_ertek);
+                                abababb.fuggv_poj = Convert.ToInt16(vissza.kerdivadat[i].fugg_proj);
+                                abababb.kerdivdate = CacheUtcTime;
+                                Debug.WriteLine("eddig jo");
+
+                                var idd2 = adatBazis.SaveCogDataKerdiv(abababb);
+                                Debug.WriteLine("eddig jo2");
+
+                                var idd = adatBazis.SaveCogDataKerdiv(new Cogkerdiv
+                                {
+                                    kerdiv1nev = vissza.kerdivadat[i].kerdiv1_nev,
+                                    kerdiv1ver = vissza.kerdivadat[i].kerdiv1_ver,
+                                    kerdivtitle = vissza.kerdivadat[i].kerdiv1_title,
+                                    kerdivtip = Convert.ToInt16(vissza.kerdivadat[i].kerdivtip),
+                                    projid = Convert.ToInt16(vissza.kerdivadat[i].proj_id),
+                                    fuggv_par = Convert.ToInt16(vissza.kerdivadat[i].fugg_par),
+                                    fuggv_par_ertek = Convert.ToInt16(vissza.kerdivadat[i].fugg_par_ertek),
+                                    fuggv_poj = Convert.ToInt16(vissza.kerdivadat[i].fugg_proj),
+                                    kerdivdate = CacheUtcTime
+
+
+                                });
+                               
+                                //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
+                            }
+                        }
+                        //var aa = vissza.getError();
+                        //var bb = vissza.getMessage();
+                        var cc = vissza.message;
+                        
+                        //var visszatrue= vissza.Rootobject.error;
+                        Debug.WriteLine("vlasz " + Convert.ToString(vissza));
                         var a = "";
                     }; 
                     reggomb = regButton;
@@ -156,7 +217,7 @@ namespace adatGyujtoX
                 }
             }
 
-            bazsiInit(myLayout, azonadat);
+            bazsiInit(myLayout, adatBazis);
 
             Content = myLayout;
         }
@@ -276,16 +337,16 @@ namespace adatGyujtoX
             return vissza;
         }
         
-        private static void bazsiInit(StackLayout myLayout, UsersDataAccess azonadat)
+        private static void bazsiInit(StackLayout myLayout, UsersDataAccess adatBazis)
         {
             ///
 
 
             //SQLiteConnection conn = new SQLiteConnection();
 
-            //UsersDataAccess azonadat = new UsersDataAccess();
+            //UsersDataAccess adatBazis = new UsersDataAccess();
             Console.Write("aaaa1");
-            var idd = azonadat.SaveCogAzon(new Cogazon
+            var idd = adatBazis.SaveCogAzon(new Cogazon
             {
                 uemail = "1",
                 uname = "helloleo",
@@ -293,7 +354,7 @@ namespace adatGyujtoX
                 userid = 1,
                 usname = "1"
             });
-            var idd2 = azonadat.SaveCogAzon(new Cogazon
+            var idd2 = adatBazis.SaveCogAzon(new Cogazon
             {
                 uemail = "12",
                 uname = "helloleo",
@@ -303,12 +364,12 @@ namespace adatGyujtoX
             });
             Console.Write("aaaa2");
             //Cogazon mostadat = new Cogazon();
-            var mostadat = azonadat.GetCogAzonAsSern(idd - 1);
+            var mostadat = adatBazis.GetCogAzonAsSern(idd - 1);
             if (mostadat is Cogazon)
             {
                 var alfa = "aaaa";
             }
-            IEnumerable<Cogazon> mostadat2 = azonadat.GetCogAzonAsSern(idd - 1);
+            IEnumerable<Cogazon> mostadat2 = adatBazis.GetCogAzonAsSern(idd - 1);
             if (mostadat2 is Cogazon)
             {
                 var alfa2 = "aaaa";
