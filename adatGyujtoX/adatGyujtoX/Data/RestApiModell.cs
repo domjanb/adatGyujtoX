@@ -4,13 +4,33 @@ using System.Text;
 
 namespace adatGyujtoX.Data
 {
-    class RestApiModell
+    public class RestApiModell
     {
 
+        public bool error { get; set; }
+        public string message { get; set; }
+        public string id { get; set; }
+        public string proj_id { get; set; }
+        public string kerdiv1_nev { get; set; }
+        public string kerdiv1_ver { get; set; }
+        public string kerdiv2_le { get; set; }
+        public int darab { get; set; }
+        public Kerdivadat[] kerdivadat { get; set; }
 
-        public class Rootobject
+        public class RootObject
         {
-            public bool error { get; set; }
+            public bool _error;
+            public bool error
+            {
+                get
+                {
+                    return _error;
+                }
+                set
+                {
+                    this._error = value;
+                }
+            }
             public string message { get; set; }
             public string id { get; set; }
             public string proj_id { get; set; }
@@ -35,6 +55,7 @@ namespace adatGyujtoX.Data
             public string fugg_par_ertek { get; set; }
         }
 
-
+        public RestApiModell() { }
+        
     }
 }

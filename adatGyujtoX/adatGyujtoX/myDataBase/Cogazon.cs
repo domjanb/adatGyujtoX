@@ -12,7 +12,8 @@ namespace adatGyujtoX
     {
         private int _id;
        [PrimaryKey, AutoIncrement]
-        public int id{
+        public int id
+        {
             get { return _id; }
             set
             { this._id = value;

@@ -14,13 +14,16 @@ namespace adatGyujtoX
         private SQLiteConnection database;
 
         public ObservableCollection<Cogazon> CogUser { get; set; }
+        public ObservableCollection<Cogkerdiv> CogDataKerdiv { get; set; }
 
         public UsersDataAccess()
         {
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Cogazon>();
+            database.CreateTable<Cogkerdiv>();
 
             this.CogUser = new ObservableCollection<Cogazon>(database.Table<Cogazon>());
+            this.CogDataKerdiv = new ObservableCollection<Cogkerdiv>(database.Table<Cogkerdiv>());
 
             if (!database.Table<Cogazon>().Any())
             {
@@ -119,6 +122,58 @@ namespace adatGyujtoX
                 
             
             
+        }
+
+
+
+
+        public IEnumerable<Cogkerdiv> GetCogDataKerdiv()
+        {
+            lock (collisionLock)
+            {
+                return database.Query<Cogkerdiv>("Select * from CogKerdiv").AsEnumerable();
+
+            }
+        }
+        public int SaveCogDataKerdiv(Cogkerdiv CogDataKerdivAdat)
+        {
+            lock (collisionLock)
+            {
+                if (CogDataKerdivAdat.id != 0)
+                {
+                    database.Update(CogDataKerdivAdat);
+                    return CogDataKerdivAdat.id;
+                }
+                else
+                {
+                    database.Insert(CogDataKerdivAdat);
+                    return CogDataKerdivAdat.id;
+                }
+            }
+        }
+        public int DeleteCogDataKerdiv(Cogkerdiv CogDataKerdivAdat)
+        {
+            var id = CogDataKerdivAdat.id;
+            if (id != 0)
+            {
+                lock (collisionLock)
+                {
+                    database.Delete<Cogkerdiv>(id);
+                }
+
+            }
+            this.CogDataKerdiv.Remove(CogDataKerdivAdat);
+            return id;
+        }
+        public void DeleteCogDataKerdivAll()
+        {
+            lock (collisionLock)
+            {
+                database.DeleteAll<Cogkerdiv>();
+            }
+
+
+
         }
     }
 }

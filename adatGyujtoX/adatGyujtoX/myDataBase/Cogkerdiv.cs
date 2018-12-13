@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace adatGyujtoX
 {
     [Table("CogKerdiv")]
-    public class Cogkerdiv : INotifyPropertyChanged
+    public class Cogkerdiv // : INotifyPropertyChanged
     {
         private int _id;
         [PrimaryKey, AutoIncrement]
@@ -17,7 +18,7 @@ namespace adatGyujtoX
             set
             {
                 this._id = value;
-                OnProperityChange(nameof(id));
+                //OnProperityChange(nameof(id));
             }
 
         }
@@ -29,7 +30,7 @@ namespace adatGyujtoX
             set
             {
                 this._kerdiv1nev = value;
-                OnProperityChange(nameof(kerdiv1nev));
+                //OnProperityChange(nameof(kerdiv1nev));
             }
         }
         private string _kerdiv1ver;
@@ -39,7 +40,7 @@ namespace adatGyujtoX
             set
             {
                 this._kerdiv1ver = value;
-                OnProperityChange(nameof(kerdiv1ver));
+                //OnProperityChange(nameof(kerdiv1ver));
             }
         }
         private string _kerdivtitle;
@@ -49,7 +50,7 @@ namespace adatGyujtoX
             set
             {
                 this._kerdivtitle = value;
-                OnProperityChange(nameof(kerdivtitle));
+                //OnProperityChange(nameof(kerdivtitle));
             }
         }
         private int _kerdivtip;
@@ -60,7 +61,7 @@ namespace adatGyujtoX
             set
             {
                 this._kerdivtip = value;
-                OnProperityChange(nameof(kerdivtip));
+                //OnProperityChange(nameof(kerdivtip));
             }
         }
         private int _projid;
@@ -71,7 +72,7 @@ namespace adatGyujtoX
             set
             {
                 this._projid = value;
-                OnProperityChange(nameof(projid));
+                //OnProperityChange(nameof(projid));
             }
         }
         private int _fuggv_par;
@@ -81,7 +82,7 @@ namespace adatGyujtoX
             set
             {
                 this._fuggv_par = value;
-                OnProperityChange(nameof(fuggv_par));
+                //OnProperityChange(nameof(fuggv_par));
             }
         }
         private int _fuggv_par_ertek;
@@ -91,7 +92,7 @@ namespace adatGyujtoX
             set
             {
                 this._fuggv_par_ertek = value;
-                OnProperityChange(nameof(fuggv_par_ertek));
+                //OnProperityChange(nameof(fuggv_par_ertek));
             }
         }
         private int _fuggv_poj;
@@ -101,7 +102,7 @@ namespace adatGyujtoX
             set
             {
                 this._fuggv_poj = value;
-                OnProperityChange(nameof(fuggv_poj));
+                //OnProperityChange(nameof(fuggv_poj));
             }
         }
         private DateTime _kerdivdate;
@@ -112,7 +113,7 @@ namespace adatGyujtoX
             set
             {
                 this._kerdivdate = value;
-                OnProperityChange(nameof(kerdivdate));
+                //OnProperityChange(nameof(kerdivdate));
             }
         }
 
