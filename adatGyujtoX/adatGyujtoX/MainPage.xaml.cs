@@ -125,6 +125,7 @@ namespace adatGyujtoX
                         vissza = await rs.Reggi(user);
                         if (vissza.error)
                         {
+
                             name.IsVisible = false;
                             name2.IsVisible = false;
                             emil.IsVisible = false;
