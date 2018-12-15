@@ -23,7 +23,6 @@ namespace adatGyujtoX
         }
 
         private string _uemail;
-        [NotNull]
         public string uemail
         {
             get { return _uemail; }
@@ -35,7 +34,6 @@ namespace adatGyujtoX
         }
 
         private string _uname;
-        [NotNull]
         public string uname
         {
             get { return _uname; }
@@ -47,7 +45,6 @@ namespace adatGyujtoX
         }
 
         private string _upass;
-        [NotNull]
         public string upass
         {
             get { return _upass; }
@@ -59,7 +56,6 @@ namespace adatGyujtoX
         }
 
         private string _usname;
-        [NotNull]
         public string usname
         {
             get { return _usname; }
@@ -71,7 +67,6 @@ namespace adatGyujtoX
         }
 
         private int _userid;
-        [NotNull]
         public int userid
         {
             get { return _userid; }

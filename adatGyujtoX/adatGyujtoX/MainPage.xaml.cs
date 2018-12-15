@@ -139,15 +139,19 @@ namespace adatGyujtoX
                             //regButton.IsVisible = false;
                             
                             myLayout.Children.Remove(regForm);
+                            var scroll = new ScrollView();
+                            
 
+                            var stack = new StackLayout();
+                            scroll.Content = stack;
                             var regForm2 = new Grid();
                             regForm2.HorizontalOptions = LayoutOptions.Center;
                             //regForm2.BackgroundColor = Color.LightGray;
                             regForm2.Padding = 5;
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                            regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                            regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
 
                             for (int i=0; i<vissza.darab;i++)
                             {
@@ -178,7 +182,9 @@ namespace adatGyujtoX
 
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
-                            myLayout.Children.Add(regForm2);
+                            
+                            stack.Children.Add(regForm2);
+                            myLayout.Children.Add(scroll);
 
                         }
                         //var aa = vissza.getError();
