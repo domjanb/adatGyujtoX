@@ -44,22 +44,23 @@ namespace adatGyujtoX.Data
             postData.Add(new KeyValuePair<string, string>("user_email", user.user_emil));
             var content = new FormUrlEncodedContent(postData);
             var uri = Constans.webUrl;
+            Debug.WriteLine("egynek jo");
             var response = await PostResponseReggi<Token>(uri,content);
             return response;
 
         }
         public async Task<RestApiModell> PostResponseReggi<T>(string uri,FormUrlEncodedContent content) where T: class
         {
-            //Debug.WriteLine("kodeaaaaaa " );
+            Debug.WriteLine("kodeaaaaaa " );
             try
             {
-                //Debug.WriteLine("kodeaaaaaa2 ");
-                //Debug.WriteLine(client2);
-                //Debug.WriteLine(uri);
-                //Debug.WriteLine(content);
+                Debug.WriteLine("kodeaaaaaa2 ");
+                Debug.WriteLine(client2);
+                Debug.WriteLine(uri);
+                Debug.WriteLine(content);
                 //var response = await client2.GetStringAsync(uri);
                 var response = await client2.PostAsync(uri, content);
-                //Debug.WriteLine("kode " + Convert.ToString(response));
+                Debug.WriteLine("kode " + Convert.ToString(response));
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var jsonResult = response.Content.ReadAsStringAsync().Result;

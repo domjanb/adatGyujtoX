@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 using UIKit;
 
 namespace adatGyujtoX.iOS
@@ -24,8 +27,17 @@ namespace adatGyujtoX.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            Downloaded();
             return base.FinishedLaunching(app, options);
+        }
+        public void Downloaded()
+        {
+            CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
+            {
+                string fileName = (new NSUrl(file.Url, false)).LastPathComponent;
+                //string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
+            });
         }
     }
 }

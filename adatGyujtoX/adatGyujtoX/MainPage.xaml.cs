@@ -13,13 +13,16 @@ using adatGyujtoX.Data;
 using System.Net.Http;
 using Newtonsoft.Json;
 using adatGyujtoX.myDataBase;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 
 namespace adatGyujtoX
 {
     public partial class MainPage : ContentPage
     {
-        
-        
+
+        public IDownloadFile File;
+        bool isDownloading = true;
         List<Entry> valaszok = new List<Entry>();
         //String[] vs;
 
@@ -30,7 +33,15 @@ namespace adatGyujtoX
         {
 
             InitializeComponent();
-            
+            CrossDownloadManager.Current.CollectionChanged += (sender, e) =>
+            System.Diagnostics.Debug.WriteLine(
+                "[DownloadManager] " + e.Action + 
+                " -> New Items: " + (e.NewItems?.Count ?? 0) +
+                " at " + e.NewStartingIndex +
+                " || old items: " + (e.OldItems?.Count ?? 0) +
+                " at " + e.OldStartingIndex
+
+                );
 
             var myLayout = new StackLayout();
 
@@ -122,7 +133,9 @@ namespace adatGyujtoX
                         user.user_password = valaszok[3].Text;
                         user.user_emil = valaszok[4].Text;
                         var rs = new Data.RestService();
+                        Debug.WriteLine(user);
                         vissza = await rs.Reggi(user);
+                        Debug.WriteLine(vissza);
                         if (vissza.error)
                         {
 
@@ -173,6 +186,7 @@ namespace adatGyujtoX
 
 
                                 });
+                                
                                 var buttonM = new Button();
                                 buttonM.Text = vissza.kerdivadat[i].kerdiv1_title;
                                 regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
@@ -182,14 +196,16 @@ namespace adatGyujtoX
 
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
-                            
+                            var Url = "http://mail.cognative.hu/cogsurv/kerdiv_850_18.zip";
+                            DownloadFile(Url);
+
                             stack.Children.Add(regForm2);
                             myLayout.Children.Add(scroll);
 
                         }
-                        //var aa = vissza.getError();
-                        //var bb = vissza.getMessage();
-                        var cc = vissza.message;
+                            //var aa = vissza.getError();
+                            //var bb = vissza.getMessage();
+                            var cc = vissza.message;
                         
                         //var visszatrue= vissza.Rootobject.error;
                         Debug.WriteLine("vlasz " + Convert.ToString(vissza));
@@ -235,6 +251,7 @@ namespace adatGyujtoX
         {
             throw new NotImplementedException();
         }
+        
 
         private async Task regButtonClickAsync(object sender, EventArgs e)
         {
@@ -475,6 +492,57 @@ namespace adatGyujtoX
             return CrossConnectivity.Current.IsConnected;
 
         }
+        public async void DownloadFile(string FileName)
+        {
+            await Task.Yield();
+            //await Navigation.PushModalAsync(new DownloadingPage());
+            await Task.Run( ()=> 
+            {
+                var downLoadManager = CrossDownloadManager.Current;
+                Debug.WriteLine(FileName);
+                var file = downLoadManager.CreateDownloadFile(FileName);
+                Debug.WriteLine(file);
+                downLoadManager.Start(file, true);
+                
+                while (isDownloading)
+                {
+                    isDownloading = IsDownloading(file);
 
+                }
+            });
+            //await Navigation.PopModalAsync();
+            if (!isDownloading)
+            {
+                await DisplayAlert("File status", "File downloaded", "OK");
+                //DependencyService.Get<iToast>().ShowToast("Letoltve");
+            }
+        }
+        public bool IsDownloading(IDownloadFile File)
+        {
+            if (File == null) return false;
+            switch (File.Status)
+            {
+                case DownloadFileStatus.INITIALIZED:
+                case DownloadFileStatus.PAUSED:
+                case DownloadFileStatus.PENDING:
+                case DownloadFileStatus.RUNNING:
+                    //DependencyService.Get<IToast>().ShowToast();
+                    return true;
+                case DownloadFileStatus.COMPLETED:
+                case DownloadFileStatus.CANCELED:
+                case DownloadFileStatus.FAILED:
+                    return false;
+                default:
+                    throw new  ArgumentOutOfRangeException();
+                    //return false;
+                    //    return new ArgumentOutOfRangeException();
+            }
+
+        }
+        public void AbortDownloading()
+        {
+            CrossDownloadManager.Current.Abort(File);
+        }
     }
+
 }

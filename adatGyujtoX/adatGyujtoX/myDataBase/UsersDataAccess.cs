@@ -19,6 +19,7 @@ namespace adatGyujtoX
         public UsersDataAccess()
         {
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
+           
             database.CreateTable<Cogazon>();
             database.CreateTable<Cogkerdiv>();
 
