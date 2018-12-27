@@ -15,13 +15,19 @@ using Newtonsoft.Json;
 using adatGyujtoX.myDataBase;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
+using adatGyujtoX.Modell;
+using ICSharpCode.SharpZipLib.Zip;
+using ICSharpCode.SharpZipLib.Core;
+using System.Net;
+using System.ComponentModel;
 
 namespace adatGyujtoX
 {
     public partial class MainPage : ContentPage
     {
+        //IDownloader downloader = DependencyService.Get<IDownloader>();
 
-        public IDownloadFile File;
+        public IDownloadFile downFile;
         bool isDownloading = true;
         List<Entry> valaszok = new List<Entry>();
         //String[] vs;
@@ -33,6 +39,7 @@ namespace adatGyujtoX
         {
 
             InitializeComponent();
+            //downloader.OnFileDownloaded += OnFileDownloaded;
             CrossDownloadManager.Current.CollectionChanged += (sender, e) =>
             System.Diagnostics.Debug.WriteLine(
                 "[DownloadManager] " + e.Action + 
@@ -122,10 +129,15 @@ namespace adatGyujtoX
                     var emil = new Entry { Placeholder = "E-mail:" };
                     emil.TextChanged += OnEntryTextChanged;
                     var regButton = new Button { Text = "Registration:" };
-                    regButton.IsVisible = false;
+                    //regButton.IsVisible = false;
                     //regButton.Clicked +=await regButtonClickAsync;
                     regButton.Clicked += async (sender, e) =>
                     {
+                        valaszok[0].Text = "33";
+                        valaszok[1].Text = "33";
+                        valaszok[2].Text = "33";
+                        valaszok[3].Text = "33";
+                        valaszok[4].Text = "33";
                         User user = new User();
                         user.user_name = valaszok[0].Text;
                         user.user_surnamed = valaszok[1].Text;
@@ -196,9 +208,18 @@ namespace adatGyujtoX
 
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
-                            var Url = "http://mail.cognative.hu/cogsurv/kerdiv_850_18.zip";
-                            DownloadFile(Url);
+                            string mostFile = "/kerdiv_850_1.zip";
+                            Debug.WriteLine(Constans.myZipPath + "/" + Constans.myZipFile);
+                            if (!File.Exists(Constans.myZipPath+ mostFile))
+                            {
+                                Debug.WriteLine("nem kell " + mostFile);
+                                var Url = "http://qnr.cognative.hu/cogsurv" + mostFile;
+                                DownloadFile2(Url);
+                                //myDownloadFile(Url);
+                                //downloader.DownloadFile(Url, "Cognative");
+                            }
 
+                            Debug.WriteLine(Constans.myZipPath);
                             stack.Children.Add(regForm2);
                             myLayout.Children.Add(scroll);
 
@@ -209,7 +230,6 @@ namespace adatGyujtoX
                         
                         //var visszatrue= vissza.Rootobject.error;
                         Debug.WriteLine("vlasz " + Convert.ToString(vissza));
-                        var a = "";
                     }; 
                     reggomb = regButton;
                     
@@ -251,46 +271,20 @@ namespace adatGyujtoX
         {
             throw new NotImplementedException();
         }
-        
 
-        private async Task regButtonClickAsync(object sender, EventArgs e)
+        private void OnFileDownloaded(object sender, DownloadEventArgs e)
         {
-
-            DisplayAlert("Figyelem", "Ide jon a reggisszt", "ok", "megsem");
-            
-
-
-            /*var name = valaszok[0].Text;
-            var name2 = valaszok[1].Text;
-            var code = valaszok[2].Text;
-            var pass = valaszok[3].Text;
-            var emil = valaszok[4].Text;
-            var rs = new Data.RestService();
-            RestApiModell vissza = await rs.RefreshDataAsync();*/
-
-            /*var rs = new Data.RestService();
-            rs.name = name;
-            rs.name2 = name2;
-            rs.code = code;
-            rs.pass = pass;
-            rs.emil = emil;
-            RestApiModell vissza =rs.ReggiFutAsync();*/
-            //var vissza = rs.RefreshDataAsync();
-
-
-            //var valasz = new RestApiModell();
-
-
-            //RestApiModell x =   GetJSON();
-            /*RestApiModell ObjContactList = new RestApiModell();
-            if (contactsJson != "")
+            Debug.WriteLine(Constans.errorDuma);
+            if (e.FileSaved)
             {
-                //Converting JSON Array Objects into generic list  
-                ObjContactList = JsonConvert.DeserializeObject<RestApiModell>(contactsJson);
-            }-*/
-            var aa = "aa";
-
+                DisplayAlert("XF Downloader", "File Saved Successfully", "Close");
+            }
+            else
+            {
+                DisplayAlert("XF Downloader", "Error while saving the file", "Close");
+            }
         }
+
         public string name { get; internal set; }
         public string name2 { get; internal set; }
         public string code { get; internal set; }
@@ -335,7 +329,6 @@ namespace adatGyujtoX
                 reggomb.IsVisible = false;
             }
 
-            var alff = "aaa";
 
 
         }
@@ -396,17 +389,17 @@ namespace adatGyujtoX
             Console.Write("aaaa2");
             //Cogazon mostadat = new Cogazon();
             var mostadat = adatBazis.GetCogAzonAsSern(idd - 1);
-            if (mostadat is Cogazon)
+            IEnumerable<Cogazon> mostadat2 = adatBazis.GetCogAzonAsSern(idd - 1);
+            /*if (mostadat is Cogazon)
             {
                 var alfa = "aaaa";
             }
-            IEnumerable<Cogazon> mostadat2 = adatBazis.GetCogAzonAsSern(idd - 1);
+            
             if (mostadat2 is Cogazon)
             {
                 var alfa2 = "aaaa";
-            }
-            //mostadat.
-            var a2 = 1;
+            }*/
+            
             /*var todoData = new TodoItemDatabase("");
             todoData.SaveItemAsync(new TodoItem
             {
@@ -450,10 +443,10 @@ namespace adatGyujtoX
                 VerticalOptions = LayoutOptions.Center
             };
 
-            button.Clicked += async (sender, args) =>
+            /*button.Clicked += async (sender, args) =>
             {
-                //await Navigation.PushAsync(new HelloXamlPage());
-            };
+                await Navigation.PushAsync(new HelloXamlPage());
+            };*/
         }
 
         private int milyenANet()
@@ -492,20 +485,45 @@ namespace adatGyujtoX
             return CrossConnectivity.Current.IsConnected;
 
         }
-        public async void DownloadFile(string FileName)
+        public async void DownloadFile2(string FileName)
         {
+            int futdb = 0;
             await Task.Yield();
             //await Navigation.PushModalAsync(new DownloadingPage());
             await Task.Run( ()=> 
             {
+                futdb = futdb + 1;
+                Debug.WriteLine("dbkiir_kezd " );
                 var downLoadManager = CrossDownloadManager.Current;
-                Debug.WriteLine(FileName);
+                Debug.WriteLine("dbkiir_filename: " + FileName);
                 var file = downLoadManager.CreateDownloadFile(FileName);
-                Debug.WriteLine(file);
+                Debug.WriteLine("dbkiir_file: " + file);
+                Debug.WriteLine("futdb: " + Convert.ToString(futdb));
                 downLoadManager.Start(file, true);
-                
+
+                //Dictionary<string, string> myheaders = new Dictionary<string, string>();
+                //Dictionary<string, string> myheaders = file.Headers. ;
+                foreach (var group in file.Headers)
+                    Debug.WriteLine("Key: {0} Value: {1}", group.Key, group.Value);
+                Debug.WriteLine("dbStatus: " + Convert.ToString(file.Headers));
+                while (file.Status == DownloadFileStatus.INITIALIZED)
+                {
+                    foreach (var group in file.Headers)
+                    {
+                        Debug.WriteLine("nono");
+                        Debug.WriteLine("Key: {0} Value: {1}", group.Key, group.Value);
+                    }
+                        
+                    //Debug.WriteLine("dbStatus2a: " + file.Headers);
+                    //Debug.WriteLine("dbStatus: " + file.Status);
+                    while (file.TotalBytesExpected > file.TotalBytesWritten)
+                    {
+                        Debug.WriteLine("dbStatus2: " + file.Status);
+                    }
+                }
                 while (isDownloading)
                 {
+                    //Task.Delay(10 * 1000);
                     isDownloading = IsDownloading(file);
 
                 }
@@ -514,13 +532,18 @@ namespace adatGyujtoX
             if (!isDownloading)
             {
                 await DisplayAlert("File status", "File downloaded", "OK");
+                string[] fileNameS = FileName.Split('/');
+                var fileName = fileNameS[fileNameS.Length - 1];
+                ExtractZipFile(Constans.myZipPath + "/" + fileName,null, Constans.myZipPath);
                 //DependencyService.Get<iToast>().ShowToast("Letoltve");
             }
         }
-        public bool IsDownloading(IDownloadFile File)
+        public bool IsDownloading(IDownloadFile downFile)
         {
-            if (File == null) return false;
-            switch (File.Status)
+            //Debug.WriteLine("dbStatus" + downFile.Status);
+            
+            if (downFile == null) return false;
+            switch (downFile.Status)
             {
                 case DownloadFileStatus.INITIALIZED:
                 case DownloadFileStatus.PAUSED:
@@ -529,19 +552,100 @@ namespace adatGyujtoX
                     //DependencyService.Get<IToast>().ShowToast();
                     return true;
                 case DownloadFileStatus.COMPLETED:
+                    return false;
                 case DownloadFileStatus.CANCELED:
+                    return false;
                 case DownloadFileStatus.FAILED:
                     return false;
                 default:
                     throw new  ArgumentOutOfRangeException();
-                    //return false;
-                    //    return new ArgumentOutOfRangeException();
             }
 
         }
         public void AbortDownloading()
         {
-            CrossDownloadManager.Current.Abort(File);
+            CrossDownloadManager.Current.Abort(downFile);
+        }
+        public void myDownloadFile(string dFile)
+        {
+
+            var pathToNewFolder = Constans.myZipPath;
+            if (!File.Exists(pathToNewFolder))
+            {
+                Debug.WriteLine("nincsfolder");
+                Directory.CreateDirectory(pathToNewFolder);
+
+            }
+            Debug.WriteLine("path: " + pathToNewFolder);
+            Debug.WriteLine("file: " + dFile);
+            //Directory.CreateDirectory(pathToNewFolder);
+
+            try
+            {
+                WebClient webClient = new WebClient();
+                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                //var folder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/CodeScanner";
+                webClient.DownloadFileAsync(new Uri(dFile),  dFile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR___:" + ex.Message);
+            }
+        }
+
+
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine("ERROR___: " + e.Error.Message);
+        }
+        public void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
+        {
+            ZipFile zf = null;
+            try
+            {
+                FileStream fs = File.OpenRead(archiveFilenameIn);
+                zf = new ZipFile(fs);
+                if (!String.IsNullOrEmpty(password))
+                {
+                    zf.Password = password;     // AES encrypted entries are handled automatically
+                }
+                foreach (ZipEntry zipEntry in zf)
+                {
+                    if (!zipEntry.IsFile)
+                    {
+                        continue;           // Ignore directories
+                    }
+                    String entryFileName = zipEntry.Name;
+                    // to remove the folder from the entry:- entryFileName = Path.GetFileName(entryFileName);
+                    // Optionally match entrynames against a selection list here to skip as desired.
+                    // The unpacked length is available in the zipEntry.Size property.
+
+                    byte[] buffer = new byte[4096];     // 4K is optimum
+                    Stream zipStream = zf.GetInputStream(zipEntry);
+
+                    // Manipulate the output filename here as desired.
+                    String fullZipToPath = Path.Combine(outFolder, entryFileName);
+                    string directoryName = Path.GetDirectoryName(fullZipToPath);
+                    if (directoryName.Length > 0)
+                        Directory.CreateDirectory(directoryName);
+
+                    // Unzip file in buffered chunks. This is just as fast as unpacking to a buffer the full size
+                    // of the file, but does not waste memory.
+                    // The "using" will close the stream even if an exception occurs.
+                    using (FileStream streamWriter = File.Create(fullZipToPath))
+                    {
+                        StreamUtils.Copy(zipStream, streamWriter, buffer);
+                    }
+                }
+            }
+            finally
+            {
+                if (zf != null)
+                {
+                    zf.IsStreamOwner = true; // Makes close also shut the underlying stream
+                    zf.Close(); // Ensure we release resources
+                }
+            }
         }
     }
 

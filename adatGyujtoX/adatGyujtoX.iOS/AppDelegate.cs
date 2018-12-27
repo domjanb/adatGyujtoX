@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using adatGyujtoX.Modell;
 using Foundation;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
@@ -38,6 +38,7 @@ namespace adatGyujtoX.iOS
                 //string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
             });
+            Constans.myZipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
     }
 }

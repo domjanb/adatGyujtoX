@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\NetworkCheck.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestApiModell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Constans.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\BaseItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogazon.cs" />

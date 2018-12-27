@@ -55,7 +55,7 @@ namespace adatGyujtoX
                 userid = 0
                 //usname = "0"
             });*/
-            var a = "2";
+            //var a = "2";
 
         }
         public IEnumerable<Cogazon> GetCogAzonAsSern(int Sern)
