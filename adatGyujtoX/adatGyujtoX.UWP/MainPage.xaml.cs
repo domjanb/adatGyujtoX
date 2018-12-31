@@ -40,7 +40,6 @@ namespace adatGyujtoX.UWP
                 //var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
                 //return Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
                 string valami=Path.Combine(ApplicationData.Current.LocalFolder.Path,fileName);
-                var vege2 = "a";
                 return Path.Combine(ApplicationData.Current.LocalFolder.Path, fileName);
             });
             Constans.myZipPath = ApplicationData.Current.LocalFolder.Path;

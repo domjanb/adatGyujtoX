@@ -15,7 +15,7 @@ namespace adatGyujtoX.Data
     public class RestService
     {
         HttpClient client2;
-        RestApiModell posts;
+        //RestApiModell posts;
         TokenDatabaseController tokenDatabase = new TokenDatabaseController();
 
         public RestService()

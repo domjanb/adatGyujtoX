@@ -13,9 +13,12 @@ namespace adatGyujtoX
     public class DownloadEventArgs : EventArgs
     {
         public bool FileSaved = false;
-        public DownloadEventArgs(bool fileSaved)
+        public string ZipFileMentett = "";
+        public DownloadEventArgs(bool fileSaved, string zipFileMentett)
         {
             FileSaved = fileSaved;
+            ZipFileMentett = zipFileMentett;
+
         }
     }
 }

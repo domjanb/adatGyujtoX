@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Constans.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modell\Questions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\BaseItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogazon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\Cogdata.cs" />
@@ -34,5 +35,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\TokenDatabaseController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\UsersDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Survey.xaml.cs">
+      <DependentUpon>Survey.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Survey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

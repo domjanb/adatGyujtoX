@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using adatGyujtoX.Modell;
+using adatGyujtoX.UWP;
+using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
+using Windows.Storage;
+
+[assembly: Xamarin.Forms.Dependency(typeof(UWPDownloader))]
 namespace adatGyujtoX.UWP
 {
     public class UWPDownloader : IDownloader
     {
         public event EventHandler<DownloadEventArgs> OnFileDownloaded;
-
+        public string zipFileMentett = "";
+        string pathToNewFolder;
         public void DownloadFile(string url, string folder)
         {
-            string pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
+            //string pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
+            pathToNewFolder = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder);
+            Constans.myZipPath = pathToNewFolder;
             Directory.CreateDirectory(pathToNewFolder);
 
             try
@@ -24,11 +29,12 @@ namespace adatGyujtoX.UWP
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                 string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
                 webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
+                zipFileMentett = Path.GetFileName(url);
             }
             catch (Exception ex)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
         }
         private void Completed(object sender, AsyncCompletedEventArgs e)
@@ -36,12 +42,14 @@ namespace adatGyujtoX.UWP
             if (e.Error != null)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
             else
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true, zipFileMentett));
+                
+                //Constans.ExtractZipFile(pathToNewFolder + "/" + zipFileMentett, null, pathToNewFolder);
             }
         }
     }

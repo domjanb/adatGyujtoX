@@ -10,6 +10,7 @@ using adatGyujtoX.iOS;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
+using adatGyujtoX.Modell;
 
 [assembly: Dependency(typeof(IosDownloader))]
 namespace adatGyujtoX.iOS
@@ -17,11 +18,14 @@ namespace adatGyujtoX.iOS
     public class IosDownloader : IDownloader
     {
         public event EventHandler<DownloadEventArgs> OnFileDownloaded;
+        public string zipFileMentett = "";
+        string pathToNewFolder;
 
         public void DownloadFile(string url, string folder)
         {
-            string pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
+            pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
             Directory.CreateDirectory(pathToNewFolder);
+            Constans.myZipPath = pathToNewFolder;
 
             try
             {
@@ -29,11 +33,12 @@ namespace adatGyujtoX.iOS
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                 string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
                 webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
+                zipFileMentett = Path.GetFileName(url);
             }
             catch (Exception ex)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
         }
 
@@ -42,12 +47,12 @@ namespace adatGyujtoX.iOS
             if (e.Error != null)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
             else
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true, zipFileMentett));
             }
         }
     }

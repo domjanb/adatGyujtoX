@@ -22,10 +22,13 @@ namespace adatGyujtoX.Droid
     public class AndroidDownloader : IDownloader
     {
         public event EventHandler<DownloadEventArgs> OnFileDownloaded;
+        public string zipFileMentett = "";
+        string pathToNewFolder;
 
         public void DownloadFile(string url, string folder)
         {
-            string pathToNewFolder = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, folder);
+            pathToNewFolder = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, folder);
+            Constans.myZipPath = pathToNewFolder;
             Directory.CreateDirectory(pathToNewFolder);
 
             try
@@ -34,11 +37,12 @@ namespace adatGyujtoX.Droid
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                 string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
                 webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
+                zipFileMentett = Path.GetFileName(url);
             }
             catch (Exception ex)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
         }
 
@@ -48,12 +52,12 @@ namespace adatGyujtoX.Droid
             if (e.Error != null)
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }
             else
             {
                 if (OnFileDownloaded != null)
-                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
+                    OnFileDownloaded.Invoke(this, new DownloadEventArgs(true, zipFileMentett));
             }
         }
     }

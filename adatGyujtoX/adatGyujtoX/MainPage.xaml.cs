@@ -25,8 +25,8 @@ namespace adatGyujtoX
 {
     public partial class MainPage : ContentPage
     {
-        //IDownloader downloader = DependencyService.Get<IDownloader>();
 
+        IDownloader downloader = DependencyService.Get<IDownloader>();
         public IDownloadFile downFile;
         bool isDownloading = true;
         List<Entry> valaszok = new List<Entry>();
@@ -34,12 +34,13 @@ namespace adatGyujtoX
 
         Button reggomb;
         private RestApiModell vissza;
-        private Button[] buttons;
+        //private Button[] buttons;
+        List<Button> listOfButtons = new List<Button>();
         public MainPage()
         {
 
             InitializeComponent();
-            //downloader.OnFileDownloaded += OnFileDownloaded;
+            downloader.OnFileDownloaded += OnFileDownloaded;
             CrossDownloadManager.Current.CollectionChanged += (sender, e) =>
             System.Diagnostics.Debug.WriteLine(
                 "[DownloadManager] " + e.Action + 
@@ -198,17 +199,87 @@ namespace adatGyujtoX
 
 
                                 });
-                                
+
+                                var zipFileName = "kerdiv_" + vissza.kerdivadat[i].proj_id + "_" + vissza.kerdivadat[i].kerdiv1_ver;
+
                                 var buttonM = new Button();
                                 buttonM.Text = vissza.kerdivadat[i].kerdiv1_title;
                                 regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                                 regForm2.Children.Add(buttonM, 1, i);
+                                buttonM.IsVisible = false;
+                                if (File.Exists(Constans.myZipPath + "/cognative/" + zipFileName + "/" + vissza.kerdivadat[i].kerdiv1_nev + ".json"))
+                                {
+                                    buttonM.IsVisible = true;
+                                }
+                                //buttonM.Clicked += ButtonM_Clicked;
+                                buttonM.Clicked += ( aktButton,  eredmeny) =>
+                                {
+                                    Button button = (Button)aktButton;
+                                    foreach (var itemT in Constans.myParam2)
+                                    {
+                                        if (Convert.ToString(button.Id) == itemT.Item1)
+                                        {
+                                            string ffilenev = itemT.Item3 + ".json";
+                                            String ffile = Path.Combine(Constans.myZipPath , itemT.Item2 , ffilenev);
+                                            Debug.WriteLine("ffileneve: "+  ffile);
+                                            //string jsonString = "";
+                                            string jsonString = File.ReadAllText(ffile);
+                                            jsonString = Constans.RemoveNewLines(jsonString);
+
+                                            //using (var streamReader = new StreamReader(ffile))
+                                            //{
+                                            //    jsonString = streamReader.ReadToEnd();
+                                                
+                                            //}
+                                            Questions  responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(jsonString));
+                                            Constans.aktSurvey = responseObject;
+                                            //var a = "aa";
+                                            Navigation.PushModalAsync(new Survey());
+                                            break;
+
+                                        }
+                                    }
+                                };
+
+                                //Debug.WriteLine("button_id:" + buttonM.Id);
+                                Constans.myParam.Add(Convert.ToString(buttonM.Id), zipFileName);
+                                Constans.myParam2.Add(Tuple.Create(Convert.ToString(buttonM.Id), zipFileName, vissza.kerdivadat[i].kerdiv1_nev,idd));
+                                
+                                listOfButtons.Add(buttonM);
 
 
 
                                 //Debug.WriteLine(Convert.ToDateTime(vissza.kerdivadat[i].kerdiv2_le));
                             }
-                            string mostFile = "/kerdiv_850_1.zip";
+                            Constans.kellZipIndex = 0;
+                            foreach(var button in listOfButtons)
+                            {
+                                if (!button.IsVisible)
+                                {
+                                    foreach (var itemT in Constans.myParam2)
+                                    {
+                                        if (Convert.ToString(button.Id) == itemT.Item1)
+                                        {
+                                            var Url = "http://qnr.cognative.hu/cogsurv/" + itemT.Item2 + ".zip";
+                                            //DownloadFile2(Url);
+                                            //downloader.DownloadFile(Url, "cognative");
+                                            Constans.kellZip.Add(  Url);
+
+                                        }
+                                    }
+
+                                        
+                                }
+                            }
+                            if (Constans.kellZip.Count > 0)
+                            {
+                                var aktUrl = Constans.kellZip.ElementAt(Constans.kellZipIndex);
+                                downloader.DownloadFile(aktUrl, "cognative");
+                                Constans.kellZipIndex++;
+                            }
+
+                            
+                            /*string mostFile = "/kerdiv_1_1.zip";
                             Debug.WriteLine(Constans.myZipPath + "/" + Constans.myZipFile);
                             if (!File.Exists(Constans.myZipPath+ mostFile))
                             {
@@ -216,8 +287,8 @@ namespace adatGyujtoX
                                 var Url = "http://qnr.cognative.hu/cogsurv" + mostFile;
                                 DownloadFile2(Url);
                                 //myDownloadFile(Url);
-                                //downloader.DownloadFile(Url, "Cognative");
-                            }
+                                
+                            }*/
 
                             Debug.WriteLine(Constans.myZipPath);
                             stack.Children.Add(regForm2);
@@ -267,23 +338,27 @@ namespace adatGyujtoX
             Content = myLayout;
         }
 
+        private void ButtonM_Clicked(Button sender, EventArgs e)
+        {
+            foreach (var itemT in Constans.myParam2)
+            {
+                if (Convert.ToString(sender.Id) == itemT.Item1)
+                {
+
+                    Questions responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(Constans.myZipPath,"/",itemT.Item3 + ".json"));
+                    //var a = "aa";
+                }
+            }
+                    
+            
+        }
+
         private void gombEllAll()
         {
             throw new NotImplementedException();
         }
 
-        private void OnFileDownloaded(object sender, DownloadEventArgs e)
-        {
-            Debug.WriteLine(Constans.errorDuma);
-            if (e.FileSaved)
-            {
-                DisplayAlert("XF Downloader", "File Saved Successfully", "Close");
-            }
-            else
-            {
-                DisplayAlert("XF Downloader", "Error while saving the file", "Close");
-            }
-        }
+        
 
         public string name { get; internal set; }
         public string name2 { get; internal set; }
@@ -485,42 +560,56 @@ namespace adatGyujtoX
             return CrossConnectivity.Current.IsConnected;
 
         }
+        private void OnFileDownloaded(object sender, DownloadEventArgs e)
+        {
+            Debug.WriteLine(Constans.errorDuma);
+            if (e.FileSaved)
+            {
+                //DisplayAlert("XF Downloader", "File Saved Successfully", "Close");
+                //ExtractZipFile(Constans.myZipPath + "/" + e.ZipFileMentett, null, Constans.myZipPath);
+
+
+            }
+            else
+            {
+                DisplayAlert("XF Downloader", "Error while saving the file", "Close");
+            }
+            if (Constans.kellZip.Count > 0 && Constans.kellZipIndex<Constans.kellZip.Count)
+            {
+                var aktUrl = Constans.kellZip.ElementAt(Constans.kellZipIndex);
+                downloader.DownloadFile(aktUrl, "cognative");
+                ExtractZipFile(Constans.myZipPath + "/" + e.ZipFileMentett, null, Constans.myZipPath);
+                Constans.kellZipIndex++;
+                foreach (var itemT in Constans.myParam2)
+                {
+                    if ((itemT.Item2 + ".zip") == e.ZipFileMentett)
+                    {
+                        if (File.Exists(Constans.myZipPath + "/" + itemT.Item2 + "/" + itemT.Item3 + ".json"))
+                        {
+                            foreach (var button in listOfButtons)
+                            {
+                                if (Convert.ToString(button.Id) == itemT.Item1)
+                                {
+                                    button.IsVisible = true;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
         public async void DownloadFile2(string FileName)
         {
-            int futdb = 0;
+            //int futdb = 0;
             await Task.Yield();
             //await Navigation.PushModalAsync(new DownloadingPage());
             await Task.Run( ()=> 
             {
-                futdb = futdb + 1;
-                Debug.WriteLine("dbkiir_kezd " );
                 var downLoadManager = CrossDownloadManager.Current;
-                Debug.WriteLine("dbkiir_filename: " + FileName);
                 var file = downLoadManager.CreateDownloadFile(FileName);
-                Debug.WriteLine("dbkiir_file: " + file);
-                Debug.WriteLine("futdb: " + Convert.ToString(futdb));
                 downLoadManager.Start(file, true);
 
-                //Dictionary<string, string> myheaders = new Dictionary<string, string>();
-                //Dictionary<string, string> myheaders = file.Headers. ;
-                foreach (var group in file.Headers)
-                    Debug.WriteLine("Key: {0} Value: {1}", group.Key, group.Value);
-                Debug.WriteLine("dbStatus: " + Convert.ToString(file.Headers));
-                while (file.Status == DownloadFileStatus.INITIALIZED)
-                {
-                    foreach (var group in file.Headers)
-                    {
-                        Debug.WriteLine("nono");
-                        Debug.WriteLine("Key: {0} Value: {1}", group.Key, group.Value);
-                    }
-                        
-                    //Debug.WriteLine("dbStatus2a: " + file.Headers);
-                    //Debug.WriteLine("dbStatus: " + file.Status);
-                    while (file.TotalBytesExpected > file.TotalBytesWritten)
-                    {
-                        Debug.WriteLine("dbStatus2: " + file.Status);
-                    }
-                }
                 while (isDownloading)
                 {
                     //Task.Delay(10 * 1000);
@@ -531,10 +620,44 @@ namespace adatGyujtoX
             //await Navigation.PopModalAsync();
             if (!isDownloading)
             {
-                await DisplayAlert("File status", "File downloaded", "OK");
+                //await DisplayAlert("File status", "File downloaded", "OK");
                 string[] fileNameS = FileName.Split('/');
                 var fileName = fileNameS[fileNameS.Length - 1];
                 ExtractZipFile(Constans.myZipPath + "/" + fileName,null, Constans.myZipPath);
+                foreach (var itemT in Constans.myParam2)
+                {
+                    if ((itemT.Item2 + ".zip") == fileName)
+                    {
+                        if (File.Exists(Constans.myZipPath +"/" +itemT.Item2 + "/" + itemT.Item3 + ".json")){
+                            foreach (var button in listOfButtons)
+                            {
+                                if (Convert.ToString(button.Id) == itemT.Item1)
+                                {
+                                    button.IsVisible = true;
+                                }
+                            }
+                        }
+                    }
+                        
+                }
+                /*foreach (var item in Constans.myParam)
+                {
+                    if ((item.Value+".zip") == fileName)
+                    {
+                        foreach(var button in listOfButtons)
+                        {
+                            if (Convert.ToString(button.Id) == item.Key)
+                            {
+                                button.IsVisible = true;
+                            }
+                        }
+                        
+                    }
+                    Debug.WriteLine("item: " + item.Value);
+                }*/
+                
+                
+
                 //DependencyService.Get<iToast>().ShowToast("Letoltve");
             }
         }
@@ -566,40 +689,10 @@ namespace adatGyujtoX
         {
             CrossDownloadManager.Current.Abort(downFile);
         }
-        public void myDownloadFile(string dFile)
-        {
 
-            var pathToNewFolder = Constans.myZipPath;
-            if (!File.Exists(pathToNewFolder))
-            {
-                Debug.WriteLine("nincsfolder");
-                Directory.CreateDirectory(pathToNewFolder);
-
-            }
-            Debug.WriteLine("path: " + pathToNewFolder);
-            Debug.WriteLine("file: " + dFile);
-            //Directory.CreateDirectory(pathToNewFolder);
-
-            try
-            {
-                WebClient webClient = new WebClient();
-                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                //var folder = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/CodeScanner";
-                webClient.DownloadFileAsync(new Uri(dFile),  dFile);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("ERROR___:" + ex.Message);
-            }
-        }
-
-
-        private void Completed(object sender, AsyncCompletedEventArgs e)
-        {
-            Console.WriteLine("ERROR___: " + e.Error.Message);
-        }
         public void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
         {
+            int zipDarab = 0;
             ZipFile zf = null;
             try
             {
@@ -635,6 +728,7 @@ namespace adatGyujtoX
                     using (FileStream streamWriter = File.Create(fullZipToPath))
                     {
                         StreamUtils.Copy(zipStream, streamWriter, buffer);
+                        zipDarab = zipDarab + 1;
                     }
                 }
             }
@@ -644,6 +738,7 @@ namespace adatGyujtoX
                 {
                     zf.IsStreamOwner = true; // Makes close also shut the underlying stream
                     zf.Close(); // Ensure we release resources
+
                 }
             }
         }
