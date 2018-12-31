@@ -90,6 +90,7 @@ namespace adatGyujtoX.Modell
 
 
         public static Questions aktSurvey = new Questions();
+        public static Questions.Question aktQuestion = new Questions.Question();
         public static Color BackgroundColor = Color.FromRgb(58, 153, 212);
         public static Color MainTextColor = Color.White;
         public static string webUrl = "http://qnr.cognative.hu/cogsurv/regist_ios2.php";

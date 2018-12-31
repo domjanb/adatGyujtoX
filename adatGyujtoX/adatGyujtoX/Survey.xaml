@@ -10,9 +10,9 @@
               HorizontalOptions="CenterAndExpand"
            VerticalOptions="CenterAndExpand" />
         </StackLayout>
-        <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="AliceBlue">
-            <Button Text="Vissza" Clicked="Button_Clicked" HorizontalOptions="Fill"/>
-            <Button Text="Tovább" Clicked="Button_Clicked" HorizontalOptions="Fill"/>
+        <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" >
+            <Button Text="Vissza" Clicked="Button_Clicked" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Button Text="Tovább" Clicked="Button_Clicked" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
         </StackLayout>
         
     </StackLayout>

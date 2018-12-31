@@ -27,8 +27,7 @@ namespace adatGyujtoX
     {
 
         IDownloader downloader = DependencyService.Get<IDownloader>();
-        public IDownloadFile downFile;
-        bool isDownloading = true;
+        
         List<Entry> valaszok = new List<Entry>();
         //String[] vs;
 
@@ -232,6 +231,7 @@ namespace adatGyujtoX
                                                 
                                             //}
                                             Questions  responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(jsonString));
+                                            Constans.aktQuestion = responseObject.questions.ElementAt(0);
                                             Constans.aktSurvey = responseObject;
                                             //var a = "aa";
                                             Navigation.PushModalAsync(new Survey());
@@ -599,97 +599,7 @@ namespace adatGyujtoX
                 }
             }
         }
-        public async void DownloadFile2(string FileName)
-        {
-            //int futdb = 0;
-            await Task.Yield();
-            //await Navigation.PushModalAsync(new DownloadingPage());
-            await Task.Run( ()=> 
-            {
-                var downLoadManager = CrossDownloadManager.Current;
-                var file = downLoadManager.CreateDownloadFile(FileName);
-                downLoadManager.Start(file, true);
-
-                while (isDownloading)
-                {
-                    //Task.Delay(10 * 1000);
-                    isDownloading = IsDownloading(file);
-
-                }
-            });
-            //await Navigation.PopModalAsync();
-            if (!isDownloading)
-            {
-                //await DisplayAlert("File status", "File downloaded", "OK");
-                string[] fileNameS = FileName.Split('/');
-                var fileName = fileNameS[fileNameS.Length - 1];
-                ExtractZipFile(Constans.myZipPath + "/" + fileName,null, Constans.myZipPath);
-                foreach (var itemT in Constans.myParam2)
-                {
-                    if ((itemT.Item2 + ".zip") == fileName)
-                    {
-                        if (File.Exists(Constans.myZipPath +"/" +itemT.Item2 + "/" + itemT.Item3 + ".json")){
-                            foreach (var button in listOfButtons)
-                            {
-                                if (Convert.ToString(button.Id) == itemT.Item1)
-                                {
-                                    button.IsVisible = true;
-                                }
-                            }
-                        }
-                    }
-                        
-                }
-                /*foreach (var item in Constans.myParam)
-                {
-                    if ((item.Value+".zip") == fileName)
-                    {
-                        foreach(var button in listOfButtons)
-                        {
-                            if (Convert.ToString(button.Id) == item.Key)
-                            {
-                                button.IsVisible = true;
-                            }
-                        }
-                        
-                    }
-                    Debug.WriteLine("item: " + item.Value);
-                }*/
-                
-                
-
-                //DependencyService.Get<iToast>().ShowToast("Letoltve");
-            }
-        }
-        public bool IsDownloading(IDownloadFile downFile)
-        {
-            //Debug.WriteLine("dbStatus" + downFile.Status);
-            
-            if (downFile == null) return false;
-            switch (downFile.Status)
-            {
-                case DownloadFileStatus.INITIALIZED:
-                case DownloadFileStatus.PAUSED:
-                case DownloadFileStatus.PENDING:
-                case DownloadFileStatus.RUNNING:
-                    //DependencyService.Get<IToast>().ShowToast();
-                    return true;
-                case DownloadFileStatus.COMPLETED:
-                    return false;
-                case DownloadFileStatus.CANCELED:
-                    return false;
-                case DownloadFileStatus.FAILED:
-                    return false;
-                default:
-                    throw new  ArgumentOutOfRangeException();
-            }
-
-        }
-        public void AbortDownloading()
-        {
-            CrossDownloadManager.Current.Abort(downFile);
-        }
-
+        
         public void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
         {
             int zipDarab = 0;
