@@ -20,6 +20,7 @@
       <DependentUpon>Lablec.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\myCheckbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Radiobutton.xaml.cs">
       <DependentUpon>Radiobutton.xaml</DependentUpon>
       <SubType>Code</SubType>

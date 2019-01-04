@@ -4,9 +4,16 @@
              x:Class="adatGyujtoX.Controls.Radiobutton">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout x:Name="my2Layout">
+                <!-- Unified Design -->
+
+
+
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        
+
+        </ContentPage.Content>
+
+
 </ContentPage>

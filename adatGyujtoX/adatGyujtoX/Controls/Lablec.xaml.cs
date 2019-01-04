@@ -25,8 +25,7 @@ namespace adatGyujtoX.Controls
 
         private void _Continue_Clicked(object sender, EventArgs e)
         {
-            Debug.WriteLine("volt nyomi");
-            //DisplayAlert("Continue ", "volt nyomi", "Cancel");
+
         }
     }
 }

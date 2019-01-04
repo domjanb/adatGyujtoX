@@ -1,12 +1,16 @@
-﻿using adatGyujtoX.Modell;
+﻿using adatGyujtoX.Controls;
+using adatGyujtoX.Modell;
+
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 
 namespace adatGyujtoX.Fregments
 {
@@ -37,10 +41,40 @@ namespace adatGyujtoX.Fregments
             myLayout.Children.Add(kerdes);
             Content = myLayout;*/
 
-            Label teszt = new Label();
-            teszt.Text = "bibibi";
-            myLayout.Children.Add(teszt);
+            Label kerdes = new Label();
+            kerdes.Text = Constans.aktQuestion.question_title;
+            myLayout.Children.Add(kerdes);
 
+            myCheckbox cb = new myCheckbox();
+            cb.Shape = Shape.Rectangle;
+            cb.IsCheckedChanged += Cb_IsCheckedChanged;
+            myLayout.Children.Add(cb);
+
+            myCheckbox cb2 = new myCheckbox();
+            cb2.Shape=Shape.Circle;
+            cb2.IsCheckedChanged += Cb_IsCheckedChanged;
+            myLayout.Children.Add(cb2);
+
+
+
+
+
+        }
+        private void _Continue_Clicked(object sender, EventArgs e)
+        {
+            Debug.WriteLine("volt nyomi");
+            //DisplayAlert("Continue ", "volt nyomi", "Cancel");
+        }
+        private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
+        {
+            if (e.Parameter.Equals(true))
+            {
+                Debug.WriteLine("valami volt - true");
+            }
+            else
+            {
+                Debug.WriteLine("valami volt - false");
+            }
             
 
         }
