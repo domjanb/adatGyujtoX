@@ -346,6 +346,7 @@ namespace adatGyujtoX.Controls
         }
 
         public static readonly BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked), typeof(bool), typeof(myCheckbox), false, BindingMode.TwoWay, propertyChanged: OnIsCheckedChanged);
+        
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:IntelliAbb.Xamarin.Controls.Checkbox"/> is checked.
         /// </summary>

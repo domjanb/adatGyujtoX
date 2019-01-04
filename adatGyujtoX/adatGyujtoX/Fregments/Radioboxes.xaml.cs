@@ -17,7 +17,17 @@ namespace adatGyujtoX.Fregments
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Radioboxes : ContentPage
 	{
-		public Radioboxes ()
+        //string bumbuc_false = "\U0001F518";
+        //string bumbuc_true = "\U000123FA";
+
+        //string bumbuc_false = "\U000125CB";
+        //string bumbuc_true = "\U000125C9";
+
+        string bumbuc_false = "⚪";
+        string bumbuc_true = "⚫";
+        Color semiTransparentColor = new Color(0, 0, 0, 0.9);
+
+        public Radioboxes ()
 		{
 			InitializeComponent ();
             /*var myLayout = new StackLayout();
@@ -40,6 +50,13 @@ namespace adatGyujtoX.Fregments
 
             myLayout.Children.Add(kerdes);
             Content = myLayout;*/
+            Button button = new Button();
+            button.Text = bumbuc_true + " hello leo " + bumbuc_false;
+
+            button.BackgroundColor = semiTransparentColor;
+            //button.Opacity = 1;
+            button.Clicked += button_Clicked;
+            myLayout.Children.Add(button);
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
@@ -60,11 +77,26 @@ namespace adatGyujtoX.Fregments
 
 
         }
-        private void _Continue_Clicked(object sender, EventArgs e)
+
+        private void button_Clicked(object sender, EventArgs e)
         {
-            Debug.WriteLine("volt nyomi");
-            //DisplayAlert("Continue ", "volt nyomi", "Cancel");
+            Button mostNyomi=(Button)sender;
+            string eleje = mostNyomi.Text;
+            string eleje2 = Convert.ToString(eleje.ElementAt(0));
+            string vege = eleje.Substring(1,eleje.Length-1);
+            if (eleje2 == bumbuc_false)
+            {
+                mostNyomi.Text = bumbuc_true + vege;
+            }
+            else
+            {
+                mostNyomi.Text = bumbuc_false + vege;
+            }
+            Debug.WriteLine("nyomi");
+
+
         }
+
         private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
         {
             if (e.Parameter.Equals(true))
