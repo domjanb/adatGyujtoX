@@ -16,9 +16,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Lablec.xaml.cs">
+      <DependentUpon>Lablec.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Radiobutton.xaml.cs">
+      <DependentUpon>Radiobutton.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Data\NetworkCheck.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestApiModell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\Radioboxes.xaml.cs">
+      <DependentUpon>Radioboxes.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Constans.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Questions.cs" />
@@ -47,7 +59,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)NewFolder1\" />
-    <Folder Include="$(MSBuildThisFileDirectory)NewFolder\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\Lablec.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\Radioboxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\Radiobutton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

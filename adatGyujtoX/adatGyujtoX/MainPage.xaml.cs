@@ -20,6 +20,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
 using System.Net;
 using System.ComponentModel;
+using adatGyujtoX.Fregments;
 
 namespace adatGyujtoX
 {
@@ -234,7 +235,7 @@ namespace adatGyujtoX
                                             Constans.aktQuestion = responseObject.questions.ElementAt(0);
                                             Constans.aktSurvey = responseObject;
                                             //var a = "aa";
-                                            Navigation.PushModalAsync(new Survey());
+                                            Navigation.PushModalAsync(new Radioboxes());
                                             break;
 
                                         }
