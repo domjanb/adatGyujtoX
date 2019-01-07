@@ -23,8 +23,11 @@ namespace adatGyujtoX.Fregments
         //string bumbuc_false = "\U000125CB";
         //string bumbuc_true = "\U000125C9";
 
-        string bumbuc_false = "⚪";
-        string bumbuc_true = "⚫";
+        string bumbuc_false = "☐";
+        string bumbuc_true = "☒";
+
+        //string bumbuc_false = "⚪";
+        //string bumbuc_true = "⚫";
         Color semiTransparentColor = new Color(0, 0, 0, 0.9);
 
         public Radioboxes ()
@@ -53,7 +56,8 @@ namespace adatGyujtoX.Fregments
             Button button = new Button();
             button.Text = bumbuc_true + " hello leo " + bumbuc_false;
 
-            button.BackgroundColor = semiTransparentColor;
+            //button.BackgroundColor = semiTransparentColor;
+            button.BackgroundColor = Color.Transparent;
             //button.Opacity = 1;
             button.Clicked += button_Clicked;
             myLayout.Children.Add(button);
@@ -62,7 +66,7 @@ namespace adatGyujtoX.Fregments
             kerdes.Text = Constans.aktQuestion.question_title;
             myLayout.Children.Add(kerdes);
 
-            myCheckbox cb = new myCheckbox();
+            /*myCheckbox cb = new myCheckbox();
             cb.Shape = Shape.Rectangle;
             cb.IsCheckedChanged += Cb_IsCheckedChanged;
             myLayout.Children.Add(cb);
@@ -70,7 +74,7 @@ namespace adatGyujtoX.Fregments
             myCheckbox cb2 = new myCheckbox();
             cb2.Shape=Shape.Circle;
             cb2.IsCheckedChanged += Cb_IsCheckedChanged;
-            myLayout.Children.Add(cb2);
+            myLayout.Children.Add(cb2);*/
 
 
 
@@ -109,6 +113,11 @@ namespace adatGyujtoX.Fregments
             }
             
 
+        }
+        private void _Continue_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+            Constans.nextPage();
         }
     }
 }

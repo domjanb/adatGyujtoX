@@ -21,8 +21,13 @@
                     <Label Text="ez az az oldal"/>
                 </StackLayout>
             </StackLayout>
-        
-            <local:Lablec/>
+
+            <StackLayout Orientation="Horizontal"
+             VerticalOptions="EndAndExpand">
+                <Button x:Name="_Back" IsVisible="False" Text="Back"  HorizontalOptions="Center" Grid.Column="0" />
+                <Button x:Name="_Continue"  Text="Continue" HorizontalOptions="CenterAndExpand" Grid.Column="1" Clicked="_Continue_Clicked"/>
+
+            </StackLayout>
         </StackLayout>
 
 

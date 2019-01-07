@@ -108,8 +108,8 @@ namespace adatGyujtoX
                     regForm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                     regForm.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
                     regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+                    regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
                     regForm.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
                     //regForm.ColumnDefinitions.w
@@ -174,9 +174,9 @@ namespace adatGyujtoX
                             regForm2.HorizontalOptions = LayoutOptions.Center;
                             //regForm2.BackgroundColor = Color.LightGray;
                             regForm2.Padding = 5;
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(5, GridUnitType.Star) });
+                            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                             regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
 
                             for (int i=0; i<vissza.darab;i++)
@@ -311,7 +311,7 @@ namespace adatGyujtoX
                     valaszok.Add(pass);
                     valaszok.Add(emil);
                     
-                    regForm.Children.Add(zeroC, 0, 0);
+                    //regForm.Children.Add(zeroC, 0, 0);
                     regForm.Children.Add(nameC, 1, 0);
                     regForm.Children.Add(name, 2, 0);
                     regForm.Children.Add(name2C, 1, 1);
@@ -347,6 +347,11 @@ namespace adatGyujtoX
                 {
 
                     Questions responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(Constans.myZipPath,"/",itemT.Item3 + ".json"));
+                    Constans.pageNumber = -1;
+                    if (responseObject.survey_properties.skip_intro)
+                    {
+                        Constans.pageNumber = 0;
+                    }
                     //var a = "aa";
                 }
             }
@@ -653,6 +658,7 @@ namespace adatGyujtoX
                 }
             }
         }
+        
     }
 
 }

@@ -5,10 +5,11 @@ using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
 using Xamarin.Forms;
 using System.IO;
+using adatGyujtoX.Fregments;
 
 namespace adatGyujtoX.Modell
 {
-    class Constans
+    class Constans: ContentPage
     {
         public struct ParamData
         {
@@ -91,6 +92,7 @@ namespace adatGyujtoX.Modell
 
         public static Questions aktSurvey = new Questions();
         public static Questions.Question aktQuestion = new Questions.Question();
+        public static int pageNumber = -100;
         public static Color BackgroundColor = Color.FromRgb(58, 153, 212);
         public static Color MainTextColor = Color.White;
         public static string webUrl = "http://qnr.cognative.hu/cogsurv/regist_ios2.php";
@@ -102,7 +104,15 @@ namespace adatGyujtoX.Modell
         //List<string> paramFromId = new List<string, int>();
         //public static string 
 
-
+        public static  void nextPage()
+        {
+            Constans.pageNumber++;
+            if (Constans.aktQuestion.question_type == "Radioboxes")
+            {
+                //Navigation.PushModalAsync(new Radioboxes());
+                
+            }
+        }
 
     }
 

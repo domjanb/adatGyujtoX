@@ -5,8 +5,9 @@
              Orientation="Horizontal"
              VerticalOptions="EndAndExpand"
              >
-    
-        <StackLayout >
+
+    <StackLayout Orientation="Horizontal"
+             VerticalOptions="EndAndExpand">
             <Button x:Name="_Back" IsVisible="False" Text="Back"  HorizontalOptions="Center" Grid.Column="0" Clicked="_Back_Clicked"/>
             <Button x:Name="_Continue"  Text="Continue" HorizontalOptions="CenterAndExpand" Grid.Column="1" Clicked="_Continue_Clicked"/>
 
