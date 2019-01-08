@@ -28,6 +28,26 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\NetworkCheck.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestApiModell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FGombok.xaml.cs">
+      <DependentUpon>FGombok.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FKepes.xaml.cs">
+      <DependentUpon>FKepes.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FNumbers.xaml.cs">
+      <DependentUpon>FNumbers.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FPage.xaml.cs">
+      <DependentUpon>FPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FString.xaml.cs">
+      <DependentUpon>FString.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Fregments\Radioboxes.xaml.cs">
       <DependentUpon>Radioboxes.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -73,6 +93,36 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\Radiobutton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FNumbers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FKepes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FString.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FGombok.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

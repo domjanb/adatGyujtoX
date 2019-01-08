@@ -9,7 +9,7 @@ using adatGyujtoX.Fregments;
 
 namespace adatGyujtoX.Modell
 {
-    class Constans: ContentPage
+    class Constans
     {
         public struct ParamData
         {
@@ -89,7 +89,11 @@ namespace adatGyujtoX.Modell
         public static Dictionary<string, string> myParam = new Dictionary<string, string>();
         public static List<Tuple<string, string, string,int>> myParam2 = new List<Tuple<string, string,string,int>>();
 
+        public static string csekbox_false = "☐";
+        public static string csekbox_true = "☒";
 
+        public static  string bumbuc_false = "⚪";
+        public static string bumbuc_true = "⚫";
         public static Questions aktSurvey = new Questions();
         public static Questions.Question aktQuestion = new Questions.Question();
         public static int pageNumber = -100;
@@ -97,6 +101,7 @@ namespace adatGyujtoX.Modell
         public static Color MainTextColor = Color.White;
         public static string webUrl = "http://qnr.cognative.hu/cogsurv/regist_ios2.php";
         public static string myZipPath = "";
+        public static string myFilePath = "";
         public static string myZipFile = "";
         public static object errorDuma = "";
         public static List<string> kellZip = new List<string>();
@@ -107,6 +112,16 @@ namespace adatGyujtoX.Modell
         public static  void nextPage()
         {
             Constans.pageNumber++;
+            int idx = 0;
+            foreach (var item in aktSurvey.questions)
+            {
+                idx++;
+                if (idx == pageNumber)
+                {
+                    aktQuestion = item;
+                }
+            }
+            
             if (Constans.aktQuestion.question_type == "Radioboxes")
             {
                 //Navigation.PushModalAsync(new Radioboxes());

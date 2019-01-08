@@ -1,6 +1,4 @@
-﻿using adatGyujtoX.Controls;
-using adatGyujtoX.Modell;
-
+﻿using adatGyujtoX.Modell;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,25 +9,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-
 namespace adatGyujtoX.Fregments
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Radioboxes : ContentPage
+	public partial class FGombok : ContentPage
 	{
-        //string bumbuc_false = "\U0001F518";
-        //string bumbuc_true = "\U000123FA";
-
-        //string bumbuc_false = "\U000125CB";
-        //string bumbuc_true = "\U000125C9";
-
-        
-        Color semiTransparentColor = new Color(0, 0, 0, 0.9);
         List<Button> listButtons = new List<Button>();
-        public Radioboxes ()
+        public FGombok ()
 		{
 			InitializeComponent ();
-
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myScroll.Content = myStack;
@@ -44,8 +32,8 @@ namespace adatGyujtoX.Fregments
             foreach (var item in Constans.aktQuestion.choices)
             {
                 Button button = new Button();
-                button.Text = Constans.bumbuc_false + "  "+item;
-                button.HorizontalOptions= LayoutOptions.Start;
+                button.Text = Constans.bumbuc_false + "  " + item;
+                button.HorizontalOptions = LayoutOptions.Start;
                 //button.FontSize = "Large";
                 button.Font = Font.SystemFontOfSize(NamedSize.Small);
                 button.BackgroundColor = Color.Transparent;
@@ -57,27 +45,11 @@ namespace adatGyujtoX.Fregments
 
 
             myLayout.Children.Add(myScroll);
-
-            /*myCheckbox cb = new myCheckbox();
-            cb.Shape = Shape.Rectangle;
-            cb.IsCheckedChanged += Cb_IsCheckedChanged;
-            myLayout.Children.Add(cb);
-
-            myCheckbox cb2 = new myCheckbox();
-            cb2.Shape=Shape.Circle;
-            cb2.IsCheckedChanged += Cb_IsCheckedChanged;
-            myLayout.Children.Add(cb2);*/
-
-
-
-
-
         }
-
         private void button_Clicked(object sender, EventArgs e)
         {
-            Button mostNyomi=(Button)sender;
-            foreach(Button button in listButtons)
+            Button mostNyomi = (Button)sender;
+            foreach (Button button in listButtons)
             {
                 string eleje = button.Text;
                 string eleje2 = Convert.ToString(eleje.ElementAt(0));
@@ -97,23 +69,9 @@ namespace adatGyujtoX.Fregments
 
 
         }
-
-        private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
-        {
-            if (e.Parameter.Equals(true))
-            {
-                Debug.WriteLine("valami volt - true");
-            }
-            else
-            {
-                Debug.WriteLine("valami volt - false");
-            }
-            
-
-        }
         private void _Continue_Clicked(object sender, EventArgs e)
         {
-            
+
             Constans.nextPage();
             Navigation.PushModalAsync(new FPage());
         }

@@ -220,6 +220,7 @@ namespace adatGyujtoX
                                         if (Convert.ToString(button.Id) == itemT.Item1)
                                         {
                                             string ffilenev = itemT.Item3 + ".json";
+                                            Constans.myFilePath = Path.Combine( Constans.myZipPath,  itemT.Item2);
                                             String ffile = Path.Combine(Constans.myZipPath , itemT.Item2 , ffilenev);
                                             Debug.WriteLine("ffileneve: "+  ffile);
                                             //string jsonString = "";
@@ -231,11 +232,13 @@ namespace adatGyujtoX
                                             //    jsonString = streamReader.ReadToEnd();
                                                 
                                             //}
-                                            Questions  responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(jsonString));
+                                            //Questions  responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(jsonString));
+                                            Questions responseObject = JsonConvert.DeserializeObject<Questions>(jsonString);
                                             Constans.aktQuestion = responseObject.questions.ElementAt(0);
                                             Constans.aktSurvey = responseObject;
+                                            Constans.pageNumber = 1;
                                             //var a = "aa";
-                                            Navigation.PushModalAsync(new Radioboxes());
+                                            Navigation.PushModalAsync(new FPage());
                                             break;
 
                                         }
