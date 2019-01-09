@@ -58,6 +58,13 @@ namespace adatGyujtoX.Fregments
 
             myLayout.Children.Add(myScroll);
 
+            MyCheckBox mc = new MyCheckBox();
+            //mc.IsCheckedChanged += Mc_IsCheckedChanged;
+            
+            mc.label = "bebebebebe";
+            myLayout.Children.Add(mc);
+            Debug.WriteLine("kezdodik");
+
             /*myCheckbox cb = new myCheckbox();
             cb.Shape = Shape.Rectangle;
             cb.IsCheckedChanged += Cb_IsCheckedChanged;
@@ -72,6 +79,12 @@ namespace adatGyujtoX.Fregments
 
 
 
+        }
+
+        private void Mc_IsCheckedChanged(object sender, MyCheckBox e)
+        {
+            Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT");
+            //throw new NotImplementedException();
         }
 
         private void button_Clicked(object sender, EventArgs e)

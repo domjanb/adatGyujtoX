@@ -21,6 +21,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\myCheckbox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCheckBox.xaml.cs">
+      <DependentUpon>MyCheckBox.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Radiobutton.xaml.cs">
       <DependentUpon>Radiobutton.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -123,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FGombok.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\MyCheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -15,7 +15,8 @@ namespace adatGyujtoX.Controls
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Radiobutton : ContentPage
     {
-		public Radiobutton ()
+        
+        public Radiobutton ()
 		{
 			InitializeComponent ();
 
@@ -31,6 +32,7 @@ namespace adatGyujtoX.Controls
         }
         private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
         {
+            //checkbox.IsCheckedChanged?.Invoke(checkbox, new TappedEventArgs((bool)newValue));
             if (e.Parameter.Equals(true))
             {
                 Debug.WriteLine("valami volt - true");
