@@ -106,6 +106,8 @@ namespace adatGyujtoX.Modell
         public static object errorDuma = "";
         public static List<string> kellZip = new List<string>();
         public static int kellZipIndex = 0;
+        public static double ScreenWidth;
+        public static double ScreenHeight;
         //List<string> paramFromId = new List<string, int>();
         //public static string 
 

@@ -28,7 +28,15 @@ namespace adatGyujtoX.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             Downloaded();
+            #region For Screen Height & Width
+
+            /*Constans.ScreenWidth = App.DisplayWidth;
+            Constans.ScreenHeight = App.DisplayHeight;*/
+            
+
+            #endregion
             return base.FinishedLaunching(app, options);
+
         }
         public void Downloaded()
         {
@@ -40,5 +48,7 @@ namespace adatGyujtoX.iOS
             });
             Constans.myZipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
+        
     }
+
 }

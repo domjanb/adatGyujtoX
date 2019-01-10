@@ -4,7 +4,8 @@
              x:Class="adatGyujtoX.Controls.MyCheckBox">
         <StackLayout>
             <StackLayout>
-                <StackLayout x:Name="myLayout">
+            
+            <StackLayout x:Name="myLayout" Padding="6">
                     <!-- Unified Design -->
 
 

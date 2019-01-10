@@ -22,6 +22,7 @@ using System.Net;
 using System.ComponentModel;
 using adatGyujtoX.Fregments;
 
+
 namespace adatGyujtoX
 {
     public partial class MainPage : ContentPage
@@ -34,8 +35,10 @@ namespace adatGyujtoX
 
         Button reggomb;
         private RestApiModell vissza;
+        
         //private Button[] buttons;
         List<Button> listOfButtons = new List<Button>();
+       
         public MainPage()
         {
 

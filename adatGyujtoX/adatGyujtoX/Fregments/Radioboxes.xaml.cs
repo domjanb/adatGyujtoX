@@ -26,6 +26,7 @@ namespace adatGyujtoX.Fregments
         
         Color semiTransparentColor = new Color(0, 0, 0, 0.9);
         List<Button> listButtons = new List<Button>();
+        List<MyCheckBox> listmyButtons = new List<MyCheckBox>();
         public Radioboxes ()
 		{
 			InitializeComponent ();
@@ -43,27 +44,49 @@ namespace adatGyujtoX.Fregments
 
             foreach (var item in Constans.aktQuestion.choices)
             {
-                Button button = new Button();
+                /*Button button = new Button();
                 button.Text = Constans.bumbuc_false + "  "+item;
                 button.HorizontalOptions= LayoutOptions.Start;
                 //button.FontSize = "Large";
                 button.Font = Font.SystemFontOfSize(NamedSize.Small);
                 button.BackgroundColor = Color.Transparent;
+                
                 listButtons.Add(button);
                 //button.Opacity = 1;
                 button.Clicked += button_Clicked;
-                myStack.Children.Add(button);
+                myStack.Children.Add(button);*/
             }
 
 
+            foreach (var item in Constans.aktQuestion.choices)
+            {
+                MyCheckBox button = new MyCheckBox();
+                button.text = Constans.bumbuc_false + "  " + item;
+                button.HorizontalOptions = LayoutOptions.Start;
+                //button.FontSize = "Large";
+                button.font= Font.SystemFontOfSize(NamedSize.Small);
+                button.BackgroundColor = Color.Transparent;
+
+                listmyButtons.Add(button);
+                //button.Opacity = 1;
+                button.Clicked += mybutton_Clicked;
+                myStack.Children.Add(button);
+            }
+
             myLayout.Children.Add(myScroll);
 
-            MyCheckBox mc = new MyCheckBox();
+           /* MyCheckBox mc = new MyCheckBox();
             //mc.IsCheckedChanged += Mc_IsCheckedChanged;
+            //mc.IsCheckedChanged += Mc_IsCheckedChanged1;
+            mc.ertesito += fgv();
+            //mc.ertesito2 += ertesiti2();
+            mc.Ertesoto3 += Mc_Ertesoto3;
+            mc.Ertesoto4 += Mc_Ertesoto4;
+            mc.isCheckedSend += myCheckboxisChecked;
             
             mc.label = "bebebebebe";
             myLayout.Children.Add(mc);
-            Debug.WriteLine("kezdodik");
+            Debug.WriteLine("kezdodik");*/
 
             /*myCheckbox cb = new myCheckbox();
             cb.Shape = Shape.Rectangle;
@@ -81,15 +104,69 @@ namespace adatGyujtoX.Fregments
 
         }
 
-        private void Mc_IsCheckedChanged(object sender, MyCheckBox e)
+        private void mybutton_Clicked(object sender, int e)
+        {
+            MyCheckBox mostNyomi = (MyCheckBox)sender;
+            foreach (MyCheckBox button in listmyButtons)
+            {
+                string eleje = button.text;
+                string eleje2 = Convert.ToString(eleje.ElementAt(0));
+                string vege = eleje.Substring(1, eleje.Length - 1);
+                if (button.Id == mostNyomi.Id)
+                {
+                    button.text = Constans.bumbuc_true + vege;
+                }
+                else
+                {
+                    button.text = Constans.bumbuc_false + vege;
+                }
+            }
+        }
+
+        /*private void myCheckboxisChecked(object sender, int e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void Mc_Ertesoto4(object sender, int e)
+        {
+            //throw new NotImplementedException();
+            Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT4");
+            Debug.WriteLine(sender);
+            Debug.WriteLine(e);
+        }
+
+
+        private void Mc_Ertesoto3(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT3");
+            Debug.WriteLine(sender);
+            Debug.WriteLine(e);
+        }
+
+        private MyCheckBox.Ertesito fgv()
+        {
+            //throw new NotImplementedException();
+            Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT");
+            return null;
+        }
+
+        private void Mc_IsCheckedChanged1(object sender, string e)
         {
             Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT");
             //throw new NotImplementedException();
         }
 
+        private void Mc_IsCheckedChanged(object sender, MyCheckBox e)
+        {
+            Debug.WriteLine("NNNNNYYYYYYEEEERRRRRRT");
+            //throw new NotImplementedException();
+        }*/
+
         private void button_Clicked(object sender, EventArgs e)
         {
-            Button mostNyomi=(Button)sender;
+            /*Button mostNyomi=(Button)sender;
             foreach(Button button in listButtons)
             {
                 string eleje = button.Text;
@@ -106,12 +183,13 @@ namespace adatGyujtoX.Fregments
             }
 
 
-            Debug.WriteLine("nyomi");
+            Debug.WriteLine("nyomi");*/
 
 
         }
+        
 
-        private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
+        /*private void Cb_IsCheckedChanged(object sender, TappedEventArgs e)
         {
             if (e.Parameter.Equals(true))
             {
@@ -123,7 +201,7 @@ namespace adatGyujtoX.Fregments
             }
             
 
-        }
+        }*/
         private void _Continue_Clicked(object sender, EventArgs e)
         {
             

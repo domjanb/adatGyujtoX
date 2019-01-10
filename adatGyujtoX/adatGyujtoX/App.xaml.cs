@@ -8,6 +8,8 @@ namespace adatGyujtoX
 {
     public partial class App : Application
     {
+        /*public static int DisplayWidth { get; set; }
+        public static int DisplayHeight { get; set; }*/
         //static TodoItemDatabase database;
         /*public static TodoItemDatabase Database
         {
