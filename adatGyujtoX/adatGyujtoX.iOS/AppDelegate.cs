@@ -8,6 +8,7 @@ using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using UIKit;
 
+
 namespace adatGyujtoX.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -32,8 +33,11 @@ namespace adatGyujtoX.iOS
 
             /*Constans.ScreenWidth = App.DisplayWidth;
             Constans.ScreenHeight = App.DisplayHeight;*/
+            //App.SetScreenDimensions((int)UIScreen.MainScreen.Bounds.Height, (int)UIScreen.MainScreen.Bounds.Width);
             
-
+            
+            //Constans.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+            //Constans.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             #endregion
             return base.FinishedLaunching(app, options);
 
@@ -46,7 +50,10 @@ namespace adatGyujtoX.iOS
                 //string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), fileName);
             });
+            Constans.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
             Constans.myZipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            
+            
         }
         
     }

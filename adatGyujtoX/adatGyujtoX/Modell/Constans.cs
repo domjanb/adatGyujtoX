@@ -108,6 +108,7 @@ namespace adatGyujtoX.Modell
         public static int kellZipIndex = 0;
         public static double ScreenWidth;
         public static double ScreenHeight;
+        
         //List<string> paramFromId = new List<string, int>();
         //public static string 
 

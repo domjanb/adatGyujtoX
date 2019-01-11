@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace adatGyujtoX.Controls
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -93,8 +94,10 @@ namespace adatGyujtoX.Controls
             label.Text = _text;
             label.HorizontalOptions = LayoutOptions.FillAndExpand;
             label.Font = Font.SystemFontOfSize(NamedSize.Small);
-            //label.WidthRequest=Constans.ScreenWidth-12;
-           
+            Debug.WriteLine(Constans.ScreenWidth);
+            //var width = DeviceDisplay.MainDisplayInfo.Width;
+            label.WidthRequest=Constans.ScreenWidth-12;
+
 
             label.BackgroundColor = Color.Red;
             //label.BackgroundColor = Color.Transparent;

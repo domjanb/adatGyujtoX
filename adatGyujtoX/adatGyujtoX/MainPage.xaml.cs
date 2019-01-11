@@ -29,7 +29,7 @@ namespace adatGyujtoX
     {
 
         IDownloader downloader = DependencyService.Get<IDownloader>();
-        
+        IDisplay display = DependencyService.Get<IDisplay>();
         List<Entry> valaszok = new List<Entry>();
         //String[] vs;
 
@@ -43,6 +43,9 @@ namespace adatGyujtoX
         {
 
             InitializeComponent();
+            
+            Constans.ScreenHeight=display.Height;
+            Constans.ScreenWidth = display.Width;
             downloader.OnFileDownloaded += OnFileDownloaded;
             CrossDownloadManager.Current.CollectionChanged += (sender, e) =>
             System.Diagnostics.Debug.WriteLine(

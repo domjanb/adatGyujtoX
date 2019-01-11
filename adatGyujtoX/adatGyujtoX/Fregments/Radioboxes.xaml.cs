@@ -30,6 +30,7 @@ namespace adatGyujtoX.Fregments
         public Radioboxes ()
 		{
 			InitializeComponent ();
+            //AbsoluteLayoutWithDisplayInfoPage();
 
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
@@ -207,6 +208,11 @@ namespace adatGyujtoX.Fregments
             
             Constans.nextPage();
             Navigation.PushModalAsync(new FPage());
+        }
+        public void AbsoluteLayoutWithDisplayInfoPage(IDisplay display)
+        {
+            var inchX = display.WidthRequestInInches(1);
+            var inchY = display.HeightRequestInInches(1);
         }
     }
 }

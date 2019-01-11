@@ -56,6 +56,7 @@
       <DependentUpon>Radioboxes.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IDisplay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Constans.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modell\Questions.cs" />
