@@ -38,8 +38,10 @@ namespace adatGyujtoX.Droid
         public Display()
         {
             var dm = Metrics;
-            Height = dm.HeightPixels;
-            Width = dm.WidthPixels;
+            double dmd = dm.Density;
+            Height = (int)(((double)dm.HeightPixels)/dmd);
+            Width = (int)(((double)dm.WidthPixels)/dmd);
+            //Width = WidthRequestInInches(Width);
             Xdpi = dm.Xdpi;
             Ydpi = dm.Ydpi;
 

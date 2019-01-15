@@ -43,6 +43,8 @@ namespace adatGyujtoX
         {
 
             InitializeComponent();
+            //var w = this.Width;
+            //var w2 = this.WidthRequest;
             
             Constans.ScreenHeight=display.Height;
             Constans.ScreenWidth = display.Width;

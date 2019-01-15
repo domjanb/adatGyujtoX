@@ -47,6 +47,13 @@ namespace adatGyujtoX.iOS
 
             //FontManager = new FontManager(this);
         }
+        public Display()
+        {
+            Height = (int)UIScreen.MainScreen.Bounds.Height; ;
+            Width = (int)UIScreen.MainScreen.Bounds.Width;
+            /*Xdpi = xdpi;
+            Ydpi = ydpi;*/
+        }
 
         /// <summary>
         ///     Returns a <see cref="System.String" /> that represents the current <see cref="Display" />.

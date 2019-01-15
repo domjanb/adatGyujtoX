@@ -5,7 +5,7 @@
 
              x:Class="adatGyujtoX.Fregments.Radioboxes">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout  >
             <StackLayout VerticalOptions="StartAndExpand">
                 <StackLayout BackgroundColor="Aqua" HorizontalOptions="FillAndExpand" Padding="20">
                     <Label Text="Cognative TouchPoint"

@@ -77,6 +77,7 @@ namespace adatGyujtoX.UWP
                 var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
                 return (int)Convert.ToInt16(bounds.Width * scaleFactor);
                 //return (int)_deviceProperties.PixelScreenSize.Width;
+                
             } }
 
 

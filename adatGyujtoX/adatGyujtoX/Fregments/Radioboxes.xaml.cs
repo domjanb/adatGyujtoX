@@ -26,7 +26,8 @@ namespace adatGyujtoX.Fregments
         
         Color semiTransparentColor = new Color(0, 0, 0, 0.9);
         List<Button> listButtons = new List<Button>();
-        List<MyCheckBox> listmyButtons = new List<MyCheckBox>();
+        //List<MyCheckBox> listmyButtons = new List<MyCheckBox>();
+        List<Checkbox> listCheckbox = new List<Checkbox>();
         public Radioboxes ()
 		{
 			InitializeComponent ();
@@ -59,7 +60,7 @@ namespace adatGyujtoX.Fregments
             }
 
 
-            foreach (var item in Constans.aktQuestion.choices)
+            /*foreach (var item in Constans.aktQuestion.choices)
             {
                 MyCheckBox button = new MyCheckBox();
                 button.text = Constans.bumbuc_false + "  " + item;
@@ -72,8 +73,21 @@ namespace adatGyujtoX.Fregments
                 //button.Opacity = 1;
                 button.Clicked += mybutton_Clicked;
                 myStack.Children.Add(button);
-            }
+            }*/
+            foreach (var item in Constans.aktQuestion.choices)
+            {
+                Checkbox button = new Checkbox();
+                button.Text = Constans.bumbuc_false + "  " + item;
+                button.HorizontalOptions = LayoutOptions.Start;
+                //button.FontSize = "Large";
+                button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+                button.BackgroundColor = Color.Transparent;
 
+                listCheckbox.Add(button);
+                //button.Opacity = 1;
+                button.CheckedChange += Button_CheckedChange;
+                myStack.Children.Add(button);
+            }
             myLayout.Children.Add(myScroll);
 
            /* MyCheckBox mc = new MyCheckBox();
@@ -105,9 +119,14 @@ namespace adatGyujtoX.Fregments
 
         }
 
+        private void Button_CheckedChange(object sender, bool e)
+        {
+            //throw new NotImplementedException();
+        }
+
         private void mybutton_Clicked(object sender, int e)
         {
-            MyCheckBox mostNyomi = (MyCheckBox)sender;
+            /*MyCheckBox mostNyomi = (MyCheckBox)sender;
             foreach (MyCheckBox button in listmyButtons)
             {
                 string eleje = button.text;
@@ -121,7 +140,7 @@ namespace adatGyujtoX.Fregments
                 {
                     button.text = Constans.bumbuc_false + vege;
                 }
-            }
+            }*/
         }
 
         /*private void myCheckboxisChecked(object sender, int e)
@@ -213,6 +232,8 @@ namespace adatGyujtoX.Fregments
         {
             var inchX = display.WidthRequestInInches(1);
             var inchY = display.HeightRequestInInches(1);
+            var ww = display.Width;
+            var ww3 = this.Width;
         }
     }
 }
