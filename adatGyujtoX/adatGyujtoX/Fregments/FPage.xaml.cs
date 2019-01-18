@@ -20,11 +20,13 @@ namespace adatGyujtoX.Fregments
             //Constans.nextPage();
             if (Constans.aktQuestion.question_type== "Radioboxes")
             {
-                Navigation.PushModalAsync(new Radioboxes());
+                //Navigation.PushModalAsync(new Radioboxes());
+                //Navigation.PushModalAsync(new FCheckBox());
+                Navigation.PushModalAsync(new FRadioButton());
             }
             else if (Constans.aktQuestion.question_type == "Kepes")
             {
-                Navigation.PushModalAsync(new FKepes());
+                Navigation.PushModalAsync(new Fkepes2());
             }
             else if(Constans.aktQuestion.question_type == "Number")
             {

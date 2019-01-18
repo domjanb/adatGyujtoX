@@ -13,71 +13,83 @@ using Xamarin.Forms.Xaml;
 namespace adatGyujtoX.Fregments
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FKepes : ContentPage
+	public partial class Fkepes2 : ContentPage
 	{
         List<ImageButton> listButtons = new List<ImageButton>();
-        public FKepes()
+        List<StackLayout> listLayout = new List<StackLayout>();
+        public Fkepes2 ()
 		{
 			InitializeComponent ();
-
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myScroll.Content = myStack;
 
-            //myLayout.Children.Add(myScroll);
+            var lalal = new StackLayout();
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
             myStack.Children.Add(kerdes);
 
             int itemDb = Constans.aktQuestion.choices.Count;
-            var regForm2 = new Grid();
-            regForm2.HorizontalOptions = LayoutOptions.Center;
-            regForm2.Padding = 15;
-            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+            //var lt = new Constans.LayoutTomb();
             for (var i = 0; i < itemDb / 2; i++)
             {
-                regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                Constans.myLayout.Add("neve" + Convert.ToString(i), new StackLayout());
             }
 
             int sor = -1;
             int idx = 0;
             var oszlop = 0;
+            int nevindex = 1;
+            var mostStack = new StackLayout();
             foreach (var item in Constans.aktQuestion.choices)
             {
                 idx++;
                 oszlop = 1;
-                if (idx % 2 == 1)
+                if (idx % 2 != 1)
+                {
+                    nevindex = nevindex + 1;
+                }
+                else
                 {
                     sor++;
                     oszlop = 0;
+                    myStack.Children.Add(mostStack);
                 }
+                var neve = "neve" + Convert.ToString(nevindex);
                 ImageButton button = new ImageButton();
                 string duma = ((string)item).ToLower();
-                if (duma=="egyéb")
+                if (duma == "egyéb")
                 {
                     duma = "other";
                 }
-                string ffile= Path.Combine( Constans.myFilePath , duma.ToLower() + "_logo.png"  );
-                button.Source= ImageSource.FromFile(ffile);
+                string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
+                button.Source = ImageSource.FromFile(ffile);
                 button.Aspect = Aspect.Fill;
-                //button.Measure()
+                
                 button.VerticalOptions = LayoutOptions.CenterAndExpand;
-                button.HorizontalOptions= LayoutOptions.CenterAndExpand;
-                //button.Text = Constans.bumbuc_false + "  " + item;
-                //button.HorizontalOptions = LayoutOptions.Start;
-
-                //button.BackgroundColor = Color.Red;
-                //button.BackgroundColor = Color.Transparent;
+                button.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 listButtons.Add(button);
-                //button.Opacity = 1;
+                
                 button.Clicked += button_Clicked;
-                regForm2.Children.Add(button,  oszlop,sor);
+                foreach(var itemL in Constans.myLayout)
+                {
+                    if (itemL.Key == neve)
+                    {
+
+                        itemL.Value.Children.Add(button);
+                    }
+                }
+                //regForm2.Children.Add(button, oszlop, sor);
+
+            }
+            foreach (var itemL in Constans.myLayout)
+            {
+                myLayout.Children.Add(itemL.Value);
                 
             }
-
-            myStack.Children.Add(regForm2);
+            //myStack.Children.Add(regForm2);
             myLayout.Children.Add(myScroll);
         }
         private void button_Clicked(object sender, EventArgs e)

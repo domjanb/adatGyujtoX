@@ -31,7 +31,7 @@ namespace adatGyujtoX.Fregments
             foreach (var item in Constans.aktQuestion.choices)
             {
                 Checkbox button = new Checkbox();
-                button.Text = Constans.bumbuc_false + "  " + item;
+                button.Text = item;
                 button.HorizontalOptions = LayoutOptions.Start;
                 //button.FontSize = "Large";
                 button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));

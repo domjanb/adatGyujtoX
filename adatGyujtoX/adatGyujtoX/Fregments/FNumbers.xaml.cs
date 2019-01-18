@@ -16,16 +16,29 @@ namespace adatGyujtoX.Fregments
 		public FNumbers ()
 		{
 			InitializeComponent ();
+            var myScroll = new ScrollView();
+            var myStack = new StackLayout();
+            myScroll.Content = myStack;
+
+            //myLayout.Children.Add(myScroll);
+
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
-            myLayout.Children.Add(kerdes);
+            myStack.Children.Add(kerdes);
+
+            Entry lblDuma = new Entry();
+            lblDuma.Keyboard = Keyboard.Numeric;
+            myStack.Children.Add(lblDuma);
             
 
-        }
 
+            myLayout.Children.Add(myScroll);
+        }
         private void _Continue_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopToRootAsync();
+
+            Constans.nextPage();
+            Navigation.PushModalAsync(new FPage());
         }
     }
 }

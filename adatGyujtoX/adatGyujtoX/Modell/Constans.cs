@@ -27,6 +27,20 @@ namespace adatGyujtoX.Modell
             public string Param3Data { get; private set; }
         }
 
+        public struct LayoutTomb
+        {
+            public LayoutTomb(string neve, StackLayout layout)
+            {
+                Neve = neve;
+                Layout = layout;
+                
+            }
+
+            public string Neve { get; private set; }
+            public StackLayout Layout { get; private set; }
+            
+        }
+
         public static void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
         {
             int zipDarab = 0;
@@ -86,6 +100,7 @@ namespace adatGyujtoX.Modell
                     .Replace("\r", string.Empty);
         }
         //public static ParamData param = new List<Constans.ParamData>();
+        public static Dictionary<string, StackLayout> myLayout = new Dictionary<string, StackLayout>();
         public static Dictionary<string, string> myParam = new Dictionary<string, string>();
         public static List<Tuple<string, string, string,int>> myParam2 = new List<Tuple<string, string,string,int>>();
 
