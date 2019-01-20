@@ -32,13 +32,15 @@ namespace adatGyujtoX.Fregments
 
             int itemDb = Constans.aktQuestion.choices.Count;
             var regForm2 = new Grid();
-            regForm2.HorizontalOptions = LayoutOptions.Center;
+            //regForm2.HorizontalOptions = LayoutOptions.Center;
+            //regForm2.VerticalOptions = LayoutOptions.FillAndExpand;
             regForm2.Padding = 15;
             regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             for (var i = 0; i < itemDb / 2; i++)
             {
-                regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                //regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+                regForm2.RowDefinitions.Add(new RowDefinition { Height =  GridLength.Auto });
             }
 
             int sor = -1;
@@ -61,10 +63,12 @@ namespace adatGyujtoX.Fregments
                 }
                 string ffile= Path.Combine( Constans.myFilePath , duma.ToLower() + "_logo.png"  );
                 button.Source= ImageSource.FromFile(ffile);
-                button.Aspect = Aspect.Fill;
+                button.Aspect = Aspect.AspectFill;
+                button.BackgroundColor = Color.Red;
                 //button.Measure()
-                button.VerticalOptions = LayoutOptions.CenterAndExpand;
-                button.HorizontalOptions= LayoutOptions.CenterAndExpand;
+                //button.VerticalOptions = LayoutOptions.FillAndExpand;
+                //button.HorizontalOptions= LayoutOptions.FillAndExpand;
+                
                 //button.Text = Constans.bumbuc_false + "  " + item;
                 //button.HorizontalOptions = LayoutOptions.Start;
 
@@ -75,8 +79,9 @@ namespace adatGyujtoX.Fregments
                 button.Clicked += button_Clicked;
                 regForm2.Children.Add(button,  oszlop,sor);
                 
+                
             }
-
+            
             myStack.Children.Add(regForm2);
             myLayout.Children.Add(myScroll);
         }

@@ -159,6 +159,14 @@ namespace adatGyujtoX
                         Debug.WriteLine(vissza);
                         if (vissza.error)
                         {
+                            var idd2 = adatBazis.SaveCogAzon(new Cogazon
+                            {
+                                uemail = user.user_emil,
+                                uname = user.user_name,
+                                upass = user.user_password,
+                                userid =Convert.ToInt16(user.user_kod),
+                                usname = user.user_surnamed
+                            });
 
                             name.IsVisible = false;
                             name2.IsVisible = false;
@@ -333,7 +341,9 @@ namespace adatGyujtoX
                     regForm.Children.Add(pass, 2, 3);
                     regForm.Children.Add(emilC, 1, 4);
                     regForm.Children.Add(emil, 2, 4);
-                    regForm.Children.Add(regButton, 2, 6);
+                    
+                    regForm.Children.Add(regButton, 1, 6);
+                    Grid.SetColumnSpan(regButton, 2);
                     //Grid.SetColumnSpan(regButton, 1);
 
 

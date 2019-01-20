@@ -30,33 +30,76 @@ namespace adatGyujtoX.Fregments
             kerdes.Text = Constans.aktQuestion.question_title;
             myStack.Children.Add(kerdes);
 
-            int itemDb = Constans.aktQuestion.choices.Count;
+            StackLayout mostsl = new StackLayout();
+            mostsl.Orientation = StackOrientation.Horizontal;
+            mostsl.HorizontalOptions = LayoutOptions.FillAndExpand;
+
+            ImageButton buttonx = new ImageButton();
+            string dumax = "egyéb";
+            if (dumax == "egyéb")
+            {
+                dumax = "other";
+            }
+            string ffilex = Path.Combine(Constans.myFilePath, dumax.ToLower() + "_logo.png");
+            buttonx.Source = ImageSource.FromFile(ffilex);
+            buttonx.Aspect = Aspect.AspectFill;
+            buttonx.HorizontalOptions = LayoutOptions.FillAndExpand;
+            mostsl.Children.Add(buttonx);
+
+            /*ImageButton buttony = new ImageButton();
+            var dumay = "egyéb";
+            if (dumay == "egyéb")
+            {
+                dumay = "other";
+            }
+            var ffiley = Path.Combine(Constans.myFilePath, dumay.ToLower() + "_logo.png");
+            buttony.Source = ImageSource.FromFile(ffiley);
+            buttony.Aspect = Aspect.AspectFill;
+            buttony.HorizontalOptions = LayoutOptions.FillAndExpand;
+            mostsl.Children.Add(buttony);*/
+            myStack.Children.Add(mostsl);
+
+
+
+            /*int itemDb = Constans.aktQuestion.choices.Count;
 
             //var lt = new Constans.LayoutTomb();
             for (var i = 0; i < itemDb / 2; i++)
             {
-                Constans.myLayout.Add("neve" + Convert.ToString(i), new StackLayout());
+                Constans.myLayout.Add("neve" + Convert.ToString(i),
+                    new StackLayout { Orientation = StackOrientation.Horizontal,
+                        
+                        
+                        
+
+                    });
             }
 
             int sor = -1;
             int idx = 0;
             var oszlop = 0;
             int nevindex = 1;
-            var mostStack = new StackLayout();
+            
+            
             foreach (var item in Constans.aktQuestion.choices)
             {
-                idx++;
+                
                 oszlop = 1;
-                if (idx % 2 != 1)
+                //if (idx % 2 != 1)
+                if (idx < 2)
                 {
-                    nevindex = nevindex + 1;
+                    idx++;
+                    
                 }
                 else
                 {
+                    nevindex = nevindex + 1;
+                    idx = 1;
                     sor++;
                     oszlop = 0;
-                    myStack.Children.Add(mostStack);
+                    
                 }
+
                 var neve = "neve" + Convert.ToString(nevindex);
                 ImageButton button = new ImageButton();
                 string duma = ((string)item).ToLower();
@@ -66,29 +109,47 @@ namespace adatGyujtoX.Fregments
                 }
                 string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
                 button.Source = ImageSource.FromFile(ffile);
-                button.Aspect = Aspect.Fill;
+                //button.Aspect = Aspect.AspectFill;
                 
-                button.VerticalOptions = LayoutOptions.CenterAndExpand;
-                button.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                //button.VerticalOptions = LayoutOptions.FillAndExpand;
+                button.HorizontalOptions = LayoutOptions.FillAndExpand;
+                button.Aspect = Aspect.AspectFill;
                 listButtons.Add(button);
-                
+
+                //Image button2 = new Image();
+                //button2.Source = ImageSource.FromFile(ffile);
+                //button2.VerticalOptions = LayoutOptions.StartAndExpand;
+                //button2.Aspect = Aspect.AspectFill;
+
+
                 button.Clicked += button_Clicked;
                 foreach(var itemL in Constans.myLayout)
                 {
                     if (itemL.Key == neve)
                     {
-
+                        Debug.WriteLine("sl.Height");
+                        StackLayout sl = (StackLayout)(itemL.Value);
+                        Debug.WriteLine(sl.Height);
                         itemL.Value.Children.Add(button);
+                        //sl.VerticalOptions = LayoutOptions.FillAndExpand;
+                        Debug.WriteLine(button.Height);
+                        sl.MinimumHeightRequest = button.Height;
+                        
+                        Debug.WriteLine(sl.Height);
+
                     }
                 }
-                //regForm2.Children.Add(button, oszlop, sor);
+            //regForm2.Children.Add(button, oszlop, sor);
 
-            }
-            foreach (var itemL in Constans.myLayout)
+        }
+            foreach (var  itemL in Constans.myLayout)
             {
-                myLayout.Children.Add(itemL.Value);
+                //StackLayout stack = itemL.Value;
+                //stack.Orientation= StackOrientation.Horizontal;
+                myStack.Children.Add(itemL.Value);
+
                 
-            }
+            }*/
             //myStack.Children.Add(regForm2);
             myLayout.Children.Add(myScroll);
         }
