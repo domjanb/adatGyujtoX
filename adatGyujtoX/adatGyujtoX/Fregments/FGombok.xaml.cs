@@ -1,4 +1,5 @@
-﻿using adatGyujtoX.Modell;
+﻿using adatGyujtoX.Controls;
+using adatGyujtoX.Modell;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,12 +15,14 @@ namespace adatGyujtoX.Fregments
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FGombok : ContentPage
 	{
-        List<Button> listButtons = new List<Button>();
+        List<Gomb> listButtons = new List<Gomb>();
         public FGombok ()
 		{
 			InitializeComponent ();
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
+            myStack.VerticalOptions = LayoutOptions.FillAndExpand;
+            myStack.HorizontalOptions = LayoutOptions.FillAndExpand;
             myScroll.Content = myStack;
 
             //myLayout.Children.Add(myScroll);
@@ -27,28 +30,93 @@ namespace adatGyujtoX.Fregments
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
             myStack.Children.Add(kerdes);
+            //myLayout.Children.Add(kerdes);
 
-
+            int mostIndex = 0;
             foreach (var item in Constans.aktQuestion.choices)
             {
-                Button button = new Button();
-                button.Text = Constans.bumbuc_false + "  " + item;
-                button.HorizontalOptions = LayoutOptions.Start;
-                //button.FontSize = "Large";
-                button.Font = Font.SystemFontOfSize(NamedSize.Small);
+                mostIndex++;
+                Gomb button = new Gomb();
+                button.Text = item;
+                button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
                 button.BackgroundColor = Color.Transparent;
+                int padding = Convert.ToInt16(Constans.ScreenWidth / 7);
+                button.Padding = new Thickness(padding, 0, padding, 0);
                 listButtons.Add(button);
-                //button.Opacity = 1;
-                button.Clicked += button_Clicked;
+                if (mostIndex == Constans.aktQuestion.choices.Count)
+                {
+                   
+                    button.Isuccso = true;
+                }
+                else
+                {
+                    
+                    button.Isuccso = false;
+                }
+                
+                //button.CheckedChange += Button_CheckedChange1;
+                button.CheckedChange += button_CheckedChange;
+                //button.CheckedChange += button_Clicked;
+                /*Thickness margin = new Thickness();
+                margin.Bottom = -10;
+                margin.Top = -0;
+                margin.Left= 0;
+                margin.Right = 0;
+                Frame fr = new Frame
+                {
+                    OutlineColor = Color.Black,
+                    BackgroundColor = Color.Aqua,
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    CornerRadius = 10,
+                    Margin = margin,
+                    Content = button,
+                    Content = new Label
+                    {
+                        Text = "I've been framed!",
+                        FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                        FontAttributes = FontAttributes.Italic,
+                        TextColor = Color.Blue
+                    }
+                };*/
+
+                
+                
                 myStack.Children.Add(button);
             }
 
 
             myLayout.Children.Add(myScroll);
         }
+
+        private void Button_CheckedChange1(object sender, bool e)
+        {
+            
+            Debug.WriteLine("nyomi");
+        }
+
+        private void button_CheckedChange(object sender, bool e)
+        {
+            Debug.WriteLine("nyomi");
+            Gomb mostNyomi = (Gomb)sender;
+            foreach (Gomb button in listButtons)
+            {
+                if (button.Id == mostNyomi.Id)
+                {
+                    button.myIschecked = true;
+                }
+                else
+                {
+                    button.myIschecked= false;
+                }
+            }
+            
+
+        }
+
         private void button_Clicked(object sender, EventArgs e)
         {
-            Button mostNyomi = (Button)sender;
+            /*Button mostNyomi = (Button)sender;
             foreach (Button button in listButtons)
             {
                 string eleje = button.Text;
@@ -62,7 +130,7 @@ namespace adatGyujtoX.Fregments
                 {
                     button.Text = Constans.bumbuc_false + vege;
                 }
-            }
+            }*/
 
 
             Debug.WriteLine("nyomi");

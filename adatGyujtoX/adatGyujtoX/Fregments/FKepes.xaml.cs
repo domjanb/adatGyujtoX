@@ -27,9 +27,9 @@ namespace adatGyujtoX.Fregments
             //myLayout.Children.Add(myScroll);
 
             Label kerdes = new Label();
-            kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.Text = Constans.aktQuestion.question_title+ "beee";
             myStack.Children.Add(kerdes);
-
+            
             int itemDb = Constans.aktQuestion.choices.Count;
             var regForm2 = new Grid();
             //regForm2.HorizontalOptions = LayoutOptions.Center;
@@ -39,7 +39,7 @@ namespace adatGyujtoX.Fregments
             regForm2.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             for (var i = 0; i < itemDb / 2; i++)
             {
-                //regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+                //regForm2.RowDefinitions.Add(new RowDefinition { Height = new GridLength(i, GridUnitType.Star) });
                 regForm2.RowDefinitions.Add(new RowDefinition { Height =  GridLength.Auto });
             }
 
@@ -64,9 +64,16 @@ namespace adatGyujtoX.Fregments
                 string ffile= Path.Combine( Constans.myFilePath , duma.ToLower() + "_logo.png"  );
                 button.Source= ImageSource.FromFile(ffile);
                 button.Aspect = Aspect.AspectFill;
+                Image im = new Image();
+                im.Source = ImageSource.FromFile(ffile);
+                Debug.WriteLine(im.Width);
+                Debug.WriteLine(im.Bounds.Width);
+                //button.
                 button.BackgroundColor = Color.Red;
+                button.BorderWidth = 4;
+                button.BorderColor = Color.Black;
                 //button.Measure()
-                //button.VerticalOptions = LayoutOptions.FillAndExpand;
+                button.VerticalOptions = LayoutOptions.FillAndExpand;
                 //button.HorizontalOptions= LayoutOptions.FillAndExpand;
                 
                 //button.Text = Constans.bumbuc_false + "  " + item;
@@ -81,9 +88,10 @@ namespace adatGyujtoX.Fregments
                 
                 
             }
-            
+
             myStack.Children.Add(regForm2);
             myLayout.Children.Add(myScroll);
+            
         }
         private void button_Clicked(object sender, EventArgs e)
         {

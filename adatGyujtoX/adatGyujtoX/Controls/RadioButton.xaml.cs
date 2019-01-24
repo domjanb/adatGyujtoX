@@ -43,6 +43,7 @@ namespace adatGyujtoX.Controls
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     ((RadioButton)bindable).boxLabel.Text = (bool)newValue ? "⚫" : "⚪";
+                ((RadioButton)bindable).CheckedChange?.Invoke(((RadioButton)bindable), (bool)newValue);
                 }
                 );
         public event EventHandler<bool> CheckedChange;

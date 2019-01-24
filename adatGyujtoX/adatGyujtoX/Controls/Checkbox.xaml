@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="adatGyujtoX.Controls.Checkbox">
-    <StackLayout Orientation="Horizontal">
+    <StackLayout Orientation="Horizontal" Margin="10,0,10,0">
         <Label x:Name="boxLabel" Text="&#x2610;" />
         <Label x:Name="textLabel" />
     </StackLayout>

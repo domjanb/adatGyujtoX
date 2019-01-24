@@ -2,6 +2,7 @@
 using adatGyujtoX.Modell;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,21 +32,24 @@ namespace adatGyujtoX.Fregments
                 {
                     RadioButton button = new RadioButton();
                     button.Text = item;
-                    button.HorizontalOptions = LayoutOptions.Start;
+                    //button.HorizontalOptions = LayoutOptions.Start;
                     //button.FontSize = "Large";
                     button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
                     button.BackgroundColor = Color.Transparent;
-
-                    listCheckbox.Add(button);
+                int padding = Convert.ToInt16(Constans.ScreenWidth / 7);
+                button.Padding = new Thickness(padding, 0, padding, 0);
+                listCheckbox.Add(button);
                     //button.Opacity = 1;
                     button.CheckedChange += Button_CheckedChange;
                     myStack.Children.Add(button);
                 }
+                //myLayout
                 myLayout.Children.Add(myScroll);
             }
         private void Button_CheckedChange(object sender, bool e)
         {
             //throw new NotImplementedException();
+            Debug.WriteLine("volt nyomi");
         }
         private void _Continue_Clicked(object sender, EventArgs e)
         {

@@ -4,6 +4,7 @@
              x:Class="adatGyujtoX.Fregments.FGombok">
     <ContentPage.Content>
         <StackLayout>
+            
             <StackLayout VerticalOptions="StartAndExpand">
                 <StackLayout BackgroundColor="Aqua" HorizontalOptions="FillAndExpand" Padding="20">
                     <Label Text="Cognative TouchPoint"
@@ -19,13 +20,14 @@
                     <Label Text="ez az az oldal"/>
                 </StackLayout>
             </StackLayout>
-
+            
             <StackLayout Orientation="Horizontal"
              VerticalOptions="EndAndExpand">
                 <Button x:Name="_Back" IsVisible="False" Text="Back"  HorizontalOptions="Center" Grid.Column="0" />
                 <Button x:Name="_Continue"  Text="Continue" HorizontalOptions="CenterAndExpand" Grid.Column="1" Clicked="_Continue_Clicked"/>
 
             </StackLayout>
+
         </StackLayout>
 
 

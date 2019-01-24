@@ -37,6 +37,7 @@ namespace adatGyujtoX.Fregments
                 button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
                 button.BackgroundColor = Color.Transparent;
 
+
                 listCheckbox.Add(button);
                 //button.Opacity = 1;
                 button.CheckedChange += Button_CheckedChange;

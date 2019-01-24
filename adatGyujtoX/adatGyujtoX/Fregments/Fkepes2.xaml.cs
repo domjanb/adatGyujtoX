@@ -20,21 +20,21 @@ namespace adatGyujtoX.Fregments
         public Fkepes2 ()
 		{
 			InitializeComponent ();
-            var myScroll = new ScrollView();
+            /*var myScroll = new ScrollView();
             var myStack = new StackLayout();
-            myScroll.Content = myStack;
+            myScroll.Content = myStack;*/
 
-            var lalal = new StackLayout();
+            //var lalal = new StackLayout();
 
-            Label kerdes = new Label();
+            /*Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
-            myStack.Children.Add(kerdes);
+            myStack.Children.Add(kerdes);*/
 
-            StackLayout mostsl = new StackLayout();
+            /*StackLayout mostsl = new StackLayout();
             mostsl.Orientation = StackOrientation.Horizontal;
-            mostsl.HorizontalOptions = LayoutOptions.FillAndExpand;
+            mostsl.HorizontalOptions = LayoutOptions.FillAndExpand;*/
 
-            ImageButton buttonx = new ImageButton();
+            /*ImageButton buttonx = new ImageButton();
             string dumax = "egyéb";
             if (dumax == "egyéb")
             {
@@ -42,9 +42,12 @@ namespace adatGyujtoX.Fregments
             }
             string ffilex = Path.Combine(Constans.myFilePath, dumax.ToLower() + "_logo.png");
             buttonx.Source = ImageSource.FromFile(ffilex);
-            buttonx.Aspect = Aspect.AspectFill;
             buttonx.HorizontalOptions = LayoutOptions.FillAndExpand;
-            mostsl.Children.Add(buttonx);
+            buttonx.Aspect = Aspect.AspectFill;
+            
+            myLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
+            myLayout.VerticalOptions = LayoutOptions.FillAndExpand;
+            myLayout.Children.Add(buttonx);*/
 
             /*ImageButton buttony = new ImageButton();
             var dumay = "egyéb";
@@ -57,7 +60,7 @@ namespace adatGyujtoX.Fregments
             buttony.Aspect = Aspect.AspectFill;
             buttony.HorizontalOptions = LayoutOptions.FillAndExpand;
             mostsl.Children.Add(buttony);*/
-            myStack.Children.Add(mostsl);
+            //myStack.Children.Add(mostsl);
 
 
 
@@ -151,7 +154,7 @@ namespace adatGyujtoX.Fregments
                 
             }*/
             //myStack.Children.Add(regForm2);
-            myLayout.Children.Add(myScroll);
+            //myLayout.Children.Add(myScroll);
         }
         private void button_Clicked(object sender, EventArgs e)
         {

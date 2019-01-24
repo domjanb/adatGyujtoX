@@ -42,10 +42,14 @@ namespace adatGyujtoX.Controls
                 false,
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
+                    Checkbox checkbox = (Checkbox)bindable;
                     ((Checkbox)bindable).boxLabel.Text = (bool)newValue ? "\u2611" : "\u2610";
+                    //checkbox.CheckedChanged?.Invoke(checkbox, (bool)newValue);
+                    ((Checkbox)bindable).CheckedChange?.Invoke(checkbox, (bool)newValue);
                 }
                 );
         public event EventHandler<bool> CheckedChange;
+
         public Checkbox ()
 		{
 			InitializeComponent ();

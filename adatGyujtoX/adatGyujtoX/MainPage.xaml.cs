@@ -137,7 +137,7 @@ namespace adatGyujtoX
                     var emilC = new Label { Text = "E-mail:", HorizontalTextAlignment = TextAlignment.End };
                     var emil = new Entry { Placeholder = "E-mail:" };
                     emil.TextChanged += OnEntryTextChanged;
-                    var regButton = new Button { Text = "Registration:" };
+                    var regButton = new Button { Text = "Registration: OLLÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ 2 OLLÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ OLÉÉ" };
                     //regButton.IsVisible = false;
                     //regButton.Clicked +=await regButtonClickAsync;
                     regButton.Clicked += async (sender, e) =>
@@ -181,6 +181,7 @@ namespace adatGyujtoX
                             //regButton.IsVisible = false;
                             
                             myLayout.Children.Remove(regForm);
+                            myLayout.Children.Remove(regButton);
                             var scroll = new ScrollView();
                             
 
@@ -342,15 +343,15 @@ namespace adatGyujtoX
                     regForm.Children.Add(emilC, 1, 4);
                     regForm.Children.Add(emil, 2, 4);
                     
-                    regForm.Children.Add(regButton, 1, 6);
-                    Grid.SetColumnSpan(regButton, 2);
+                    //regForm.Children.Add(regButton, 1, 6);
+                    //Grid.SetColumnSpan(regButton, 2);
                     //Grid.SetColumnSpan(regButton, 1);
 
 
 
-
+                    
                     myLayout.Children.Add(regForm);
-
+                    myLayout.Children.Add(regButton);
                     //ide jön a http reg
                 }
             }
