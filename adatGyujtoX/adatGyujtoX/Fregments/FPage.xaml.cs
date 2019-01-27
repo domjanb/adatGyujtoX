@@ -28,7 +28,7 @@ namespace adatGyujtoX.Fregments
             }
             else if (Constans.aktQuestion.question_type == "Kepes")
             {
-                Navigation.PushModalAsync(new FKepes());
+                Navigation.PushModalAsync(new Fkepes2());
             }
             else if(Constans.aktQuestion.question_type == "Number")
             {

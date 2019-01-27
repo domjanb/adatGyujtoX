@@ -36,10 +36,12 @@ namespace adatGyujtoX.Fregments
             foreach (var item in Constans.aktQuestion.choices)
             {
                 mostIndex++;
-                Gomb button = new Gomb();
-                button.Text = item;
-                button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
-                button.BackgroundColor = Color.Transparent;
+                Gomb button = new Gomb
+                {
+                    Text = item,
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    BackgroundColor = Color.Transparent
+                };
                 int padding = Convert.ToInt16(Constans.ScreenWidth / 7);
                 button.Padding = new Thickness(padding, 0, padding, 0);
                 listButtons.Add(button);

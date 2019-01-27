@@ -33,6 +33,7 @@ namespace adatGyujtoX.UWP
             }
             catch (Exception ex)
             {
+                Constans.exception = ex;
                 if (OnFileDownloaded != null)
                     OnFileDownloaded.Invoke(this, new DownloadEventArgs(false, zipFileMentett));
             }

@@ -1,4 +1,5 @@
-﻿using adatGyujtoX.Modell;
+﻿using adatGyujtoX.Controls;
+using adatGyujtoX.Modell;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,49 +21,44 @@ namespace adatGyujtoX.Fregments
         public Fkepes2 ()
 		{
 			InitializeComponent ();
-            /*var myScroll = new ScrollView();
+            var myScroll = new ScrollView();
             var myStack = new StackLayout();
-            myScroll.Content = myStack;*/
+            myStack.VerticalOptions = LayoutOptions.FillAndExpand;
+            myStack.HorizontalOptions = LayoutOptions.FillAndExpand;
+            //myStack.Padding = new Thickness(21, 20, 20, 20);
+            //myStack.Margin = new Thickness(20, 20, 20, 20);
+            myScroll.Content = myStack;
 
             //var lalal = new StackLayout();
 
-            /*Label kerdes = new Label();
+            Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
-            myStack.Children.Add(kerdes);*/
+            myStack.Children.Add(kerdes);
 
-            /*StackLayout mostsl = new StackLayout();
-            mostsl.Orientation = StackOrientation.Horizontal;
-            mostsl.HorizontalOptions = LayoutOptions.FillAndExpand;*/
+            /*StackLayout mostSl = new StackLayout();
+            mostSl.HorizontalOptions = LayoutOptions.Fill;
+            mostSl.VerticalOptions = LayoutOptions.Fill;
+            mostSl.Padding = new Thickness(1, 1, 1, 1);
+            mostSl.Margin = new Thickness(1, 1, 1, 1);*/
+            string duma = "other";
 
-            /*ImageButton buttonx = new ImageButton();
-            string dumax = "egyéb";
-            if (dumax == "egyéb")
-            {
-                dumax = "other";
-            }
-            string ffilex = Path.Combine(Constans.myFilePath, dumax.ToLower() + "_logo.png");
-            buttonx.Source = ImageSource.FromFile(ffilex);
-            buttonx.HorizontalOptions = LayoutOptions.FillAndExpand;
-            buttonx.Aspect = Aspect.AspectFill;
-            
-            myLayout.HorizontalOptions = LayoutOptions.FillAndExpand;
-            myLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-            myLayout.Children.Add(buttonx);*/
+            MyImageButton button = new MyImageButton();
+            string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
+            button.Source = ImageSource.FromFile(ffile);
+            int padding = Convert.ToInt16(Constans.ScreenWidth / 7 / 2);
+            button.Padding = new Thickness(0, 0, 0, 0);
+            //button.Aspect = Aspect.AspectFill;
 
-            /*ImageButton buttony = new ImageButton();
-            var dumay = "egyéb";
-            if (dumay == "egyéb")
-            {
-                dumay = "other";
-            }
-            var ffiley = Path.Combine(Constans.myFilePath, dumay.ToLower() + "_logo.png");
-            buttony.Source = ImageSource.FromFile(ffiley);
-            buttony.Aspect = Aspect.AspectFill;
-            buttony.HorizontalOptions = LayoutOptions.FillAndExpand;
-            mostsl.Children.Add(buttony);*/
-            //myStack.Children.Add(mostsl);
-
-
+            //button.VerticalOptions = LayoutOptions.FillAndExpand;
+            //button.HorizontalOptions = LayoutOptions.FillAndExpand;
+            //button.Aspect = Aspect.AspectFill;
+            //button.Margin = new Thickness(10, 10, 10, 10);
+            //button.Padding = new Thickness(1, 5, 1, 5);
+            button.BackgroundColor = Color.Red;
+            //listButtons.Add(button);
+            //mostSl.Children.Add(button);
+            myStack.Children.Add(button);
+            myLayout.Children.Add(myScroll);
 
             /*int itemDb = Constans.aktQuestion.choices.Count;
 
@@ -71,7 +67,8 @@ namespace adatGyujtoX.Fregments
             {
                 Constans.myLayout.Add("neve" + Convert.ToString(i),
                     new StackLayout { Orientation = StackOrientation.Horizontal,
-                        
+                        VerticalOptions  = LayoutOptions.FillAndExpand,
+                        HorizontalOptions = LayoutOptions.FillAndExpand
                         
                         
 
@@ -112,9 +109,11 @@ namespace adatGyujtoX.Fregments
                 }
                 string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
                 button.Source = ImageSource.FromFile(ffile);
+                int padding = Convert.ToInt16(Constans.ScreenWidth / 7/2);
+                button.Padding = new Thickness(0, 0, 0, 0);
                 //button.Aspect = Aspect.AspectFill;
-                
-                //button.VerticalOptions = LayoutOptions.FillAndExpand;
+
+                button.VerticalOptions = LayoutOptions.FillAndExpand;
                 button.HorizontalOptions = LayoutOptions.FillAndExpand;
                 button.Aspect = Aspect.AspectFill;
                 listButtons.Add(button);
@@ -152,9 +151,9 @@ namespace adatGyujtoX.Fregments
                 myStack.Children.Add(itemL.Value);
 
                 
-            }*/
+            }
             //myStack.Children.Add(regForm2);
-            //myLayout.Children.Add(myScroll);
+            myLayout.Children.Add(myScroll);*/
         }
         private void button_Clicked(object sender, EventArgs e)
         {
