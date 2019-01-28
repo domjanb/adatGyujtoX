@@ -42,7 +42,7 @@ namespace adatGyujtoX.Controls
                 false,
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
-                    ((Gomb)bindable).boxLabel.Text = (bool)newValue ? "-" : "+";
+                    ((Kinyilo)bindable).boxLabel.Text = (bool)newValue ? "-" : "+";
                     //((Gomb)bindable).myFrame.BackgroundColor = (bool)newValue ? Color.White : Color.Aqua;
                     //((Gomb)bindable).myFrame.CornerRadius = (bool)newValue ? 0 : 20;
                     ((Kinyilo)bindable).CheckedChange?.Invoke(((Kinyilo)bindable), (bool)newValue);

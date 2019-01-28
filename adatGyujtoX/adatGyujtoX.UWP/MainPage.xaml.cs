@@ -24,10 +24,12 @@ namespace adatGyujtoX.UWP
         public MainPage()
         {
             this.InitializeComponent();
-            Downloaded();
+            //Downloaded();
+            Constans.myZipPath = Path.Combine(ApplicationData.Current.LocalFolder.Path);
+            
             LoadApplication(new adatGyujtoX.App());
         }
-        public void Downloaded()
+        /*public void Downloaded()
         {
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
@@ -44,6 +46,6 @@ namespace adatGyujtoX.UWP
             });
             Constans.myZipPath = ApplicationData.Current.LocalFolder.Path;
 
-        }
+        }*/
     }
 }

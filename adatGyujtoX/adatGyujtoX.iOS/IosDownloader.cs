@@ -25,7 +25,7 @@ namespace adatGyujtoX.iOS
         {
             pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
             Directory.CreateDirectory(pathToNewFolder);
-            Constans.myZipPath = pathToNewFolder;
+            //Constans.myZipPath = pathToNewFolder;
 
             try
             {

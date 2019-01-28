@@ -42,7 +42,14 @@ namespace adatGyujtoX.Fregments
             {
                 Navigation.PushModalAsync(new FGombok());
             }
-
+            else if (Constans.aktQuestion.question_type == "SzurRadio2")
+            {
+                Navigation.PushModalAsync(new FSzurRadio2());
+            }
+            else if (Constans.aktQuestion.question_type == "SzurRadio")
+            {
+                Navigation.PushModalAsync(new FSzurRadio());
+            }
 
             //break;
         }

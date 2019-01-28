@@ -31,14 +31,14 @@ namespace adatGyujtoX.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            Downloaded();
-            
+            //Downloaded();
+            Constans.myZipPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
 
         
-        public void Downloaded()
+        /*public void Downloaded()
         {
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
@@ -53,7 +53,7 @@ namespace adatGyujtoX.Droid
             });
             //Constans.myZipPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             Constans.myZipPath = ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
-        }
+        }*/
         
     }
 }

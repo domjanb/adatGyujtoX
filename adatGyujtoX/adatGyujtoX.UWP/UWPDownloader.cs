@@ -20,7 +20,7 @@ namespace adatGyujtoX.UWP
         {
             //string pathToNewFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), folder);
             pathToNewFolder = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder);
-            Constans.myZipPath = pathToNewFolder;
+            //Constans.myZipPath = pathToNewFolder;
             Directory.CreateDirectory(pathToNewFolder);
 
             try

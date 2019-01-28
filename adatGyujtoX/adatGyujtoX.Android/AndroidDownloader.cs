@@ -30,7 +30,7 @@ namespace adatGyujtoX.Droid
             pathToNewFolder = Path.Combine(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath, folder);
             //var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
             pathToNewFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), folder);
-            Constans.myZipPath = pathToNewFolder;
+            //Constans.myZipPath = pathToNewFolder;
             Directory.CreateDirectory(pathToNewFolder);
 
             try

@@ -6,6 +6,7 @@ using ICSharpCode.SharpZipLib.Core;
 using Xamarin.Forms;
 using System.IO;
 using adatGyujtoX.Fregments;
+using adatGyujtoX.Controls;
 
 namespace adatGyujtoX.Modell
 {
@@ -40,6 +41,7 @@ namespace adatGyujtoX.Modell
             public StackLayout Layout { get; private set; }
             
         }
+        
 
         public static void ExtractZipFile(string archiveFilenameIn, string password, string outFolder)
         {
@@ -101,6 +103,7 @@ namespace adatGyujtoX.Modell
         }
         //public static ParamData param = new List<Constans.ParamData>();
         public static Dictionary<string, StackLayout> myLayout = new Dictionary<string, StackLayout>();
+        
         public static Dictionary<string, string> myParam = new Dictionary<string, string>();
         public static List<Tuple<string, string, string,int>> myParam2 = new List<Tuple<string, string,string,int>>();
 
@@ -115,6 +118,7 @@ namespace adatGyujtoX.Modell
         public static Color BackgroundColor = Color.FromRgb(58, 153, 212);
         public static Color MainTextColor = Color.White;
         public static string webUrl = "http://qnr.cognative.hu/cogsurv/regist_ios2.php";
+        public static string downUrl = "http://qnr.cognative.hu/cogsurv/";
         public static string myZipPath = "";
         public static string myFilePath = "";
         public static string myZipFile = "";

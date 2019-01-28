@@ -28,21 +28,22 @@ namespace adatGyujtoX.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            Downloaded();
+            //Downloaded();
+            Constans.myZipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
             #region For Screen Height & Width
 
             /*Constans.ScreenWidth = App.DisplayWidth;
             Constans.ScreenHeight = App.DisplayHeight;*/
             //App.SetScreenDimensions((int)UIScreen.MainScreen.Bounds.Height, (int)UIScreen.MainScreen.Bounds.Width);
-            
-            
+
+
             //Constans.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
             //Constans.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
             #endregion
             return base.FinishedLaunching(app, options);
 
         }
-        public void Downloaded()
+        /*public void Downloaded()
         {
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file =>
             {
@@ -54,7 +55,7 @@ namespace adatGyujtoX.iOS
             Constans.myZipPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             
             
-        }
+        }*/
         
     }
 

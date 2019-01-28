@@ -59,6 +59,7 @@ namespace adatGyujtoX
 
                 );
 
+            //Debug.WriteLine(Constans.myZipPath);
             var myLayout = new StackLayout();
 
             var fejlecL = new StackLayout();
@@ -237,8 +238,8 @@ namespace adatGyujtoX
                                         if (Convert.ToString(button.Id) == itemT.Item1)
                                         {
                                             string ffilenev = itemT.Item3 + ".json";
-                                            Constans.myFilePath = Path.Combine( Constans.myZipPath,  itemT.Item2);
-                                            String ffile = Path.Combine(Constans.myZipPath , itemT.Item2 , ffilenev);
+                                            Constans.myFilePath = Path.Combine( Constans.myZipPath, "cognative", itemT.Item2);
+                                            String ffile = Path.Combine(Constans.myZipPath ,"cognative",  itemT.Item2 , ffilenev);
                                             Debug.WriteLine("ffileneve: "+  ffile);
                                             //string jsonString = "";
                                             string jsonString = File.ReadAllText(ffile);
@@ -281,10 +282,10 @@ namespace adatGyujtoX
                                     {
                                         if (Convert.ToString(button.Id) == itemT.Item1)
                                         {
-                                            var Url = "http://qnr.cognative.hu/cogsurv/" + itemT.Item2 + ".zip";
+                                            var Url = Constans.downUrl + itemT.Item2 + ".zip";
                                             //DownloadFile2(Url);
                                             //downloader.DownloadFile(Url, "cognative");
-                                            Constans.kellZip.Add(  Url);
+                                            Constans.kellZip.Add(Url);
 
                                         }
                                     }
@@ -368,7 +369,7 @@ namespace adatGyujtoX
                 if (Convert.ToString(sender.Id) == itemT.Item1)
                 {
 
-                    Questions responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(Constans.myZipPath,"/",itemT.Item3 + ".json"));
+                    Questions responseObject = JsonConvert.DeserializeObject<Questions>(Path.Combine(Constans.myZipPath,"cognative",  itemT.Item3 + ".json"));
                     Constans.pageNumber = -1;
                     if (responseObject.survey_properties.skip_intro)
                     {
@@ -594,25 +595,34 @@ namespace adatGyujtoX
             if (e.FileSaved)
             {
                 //DisplayAlert("XF Downloader", "File Saved Successfully", "Close");
-                //ExtractZipFile(Constans.myZipPath + "/" + e.ZipFileMentett, null, Constans.myZipPath);
-
+                ExtractZipFile(Constans.myZipPath + "/cognative/" + e.ZipFileMentett, null, Constans.myZipPath + "/cognative/");
+                for (var zipIndex = 0; zipIndex < Constans.kellZip.Count; zipIndex++)
+                {
+                    if (Constans.downUrl + e.ZipFileMentett == Constans.kellZip.ElementAt(zipIndex))
+                    {
+                        Constans.kellZip.Remove(Constans.downUrl + e.ZipFileMentett);
+                        Constans.kellZipIndex--;
+                        break;
+                    }
+                }
+                
 
             }
             else
             {
                 DisplayAlert("XF Downloader", "Error while saving the file", "Close");
             }
-            if (Constans.kellZip.Count > 0 && Constans.kellZipIndex<Constans.kellZip.Count)
+            if (Constans.kellZip.Count > 0 && Constans.kellZipIndex<=Constans.kellZip.Count)
             {
                 var aktUrl = Constans.kellZip.ElementAt(Constans.kellZipIndex);
                 downloader.DownloadFile(aktUrl, "cognative");
-                ExtractZipFile(Constans.myZipPath + "/" + e.ZipFileMentett, null, Constans.myZipPath);
+                ExtractZipFile(Constans.myZipPath + "/cognative/" + e.ZipFileMentett, null, Constans.myZipPath+"/cognative/");
                 Constans.kellZipIndex++;
                 foreach (var itemT in Constans.myParam2)
                 {
                     if ((itemT.Item2 + ".zip") == e.ZipFileMentett)
                     {
-                        if (File.Exists(Constans.myZipPath + "/" + itemT.Item2 + "/" + itemT.Item3 + ".json"))
+                        if (File.Exists(Constans.myZipPath + "cognative/"+ itemT.Item2 + "/" + itemT.Item3 + ".json"))
                         {
                             foreach (var button in listOfButtons)
                             {
