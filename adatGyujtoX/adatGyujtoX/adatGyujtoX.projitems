@@ -36,6 +36,10 @@
       <DependentUpon>RadioButton.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TablesRadio.xaml.cs">
+      <DependentUpon>TablesRadio.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Data\NetworkCheck.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestApiModell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestService.cs" />
@@ -77,6 +81,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Fregments\FSzurRadio2.xaml.cs">
       <DependentUpon>FSzurRadio2.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Fregments\FTablesRadio.xaml.cs">
+      <DependentUpon>FTablesRadio.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Fregments\Radioboxes.xaml.cs">
@@ -203,6 +211,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FSzurRadio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\TablesRadio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Fregments\FTablesRadio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

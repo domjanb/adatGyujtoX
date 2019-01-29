@@ -2,9 +2,9 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="adatGyujtoX.Controls.RadioButton">
-    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill"  Margin="10,0,10,0" >
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill"  Margin="0,0,0,0" >
         <Label x:Name="boxLabel" Text="⚪" />
-        <Label x:Name="textLabel" />
+        <Label x:Name="textLabel" IsVisible="False"/>
     </StackLayout>
 
     <ContentView.GestureRecognizers>

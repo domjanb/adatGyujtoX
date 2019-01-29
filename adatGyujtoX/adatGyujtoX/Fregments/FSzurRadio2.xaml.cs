@@ -75,12 +75,16 @@ namespace adatGyujtoX.Fregments
             {
                 if (item.Item1 == kinyilo.Text)
                 {
-                    item.Item2.IsVisible = true;
+                    if (kinyilo.IsChecked)
+                    {
+                        item.Item2.IsVisible = true;
+                    }
+                    else
+                    {
+                        item.Item2.IsVisible = false;
+                    }
                 }
-                else
-                {
-                    item.Item2.IsVisible = false;
-                }
+                
             }
             //throw new NotImplementedException();
             

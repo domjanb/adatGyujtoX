@@ -42,7 +42,6 @@ namespace adatGyujtoX.Fregments
             szuroMezo.Placeholder = "Ide ird az adatot";
             
             szuroMezo.IsVisible = true;
-            szuroMezo.BackgroundColor = Color.Brown;
             szuroMezo.Margin = new Thickness(10, 0, 10, 0);
             szuroMezo.TextChanged += szuroMezo_TextChanged;
             myStack.Children.Add(szuroMezo);
@@ -66,8 +65,13 @@ namespace adatGyujtoX.Fregments
                     myStack.Children.Add(button);
                 }
             }
-            
-            //myLayout
+            /*Label kerdes2 = new Label();
+            kerdes2.Text = "lalalallala";
+            kerdes2.BackgroundColor = Color.Chocolate;
+            myStack2.Children.Add(kerdes2);
+            myStack2.Margin = new Thickness(10, 100, 10, 100);
+            myStack2.Padding= new Thickness(10, 100, 10, 100);*/
+            myStack.Children.Add(myStack2);
             myLayout.Children.Add(myScroll);
         }
 
@@ -112,9 +116,30 @@ namespace adatGyujtoX.Fregments
                     }
                     else
                     {
-                        myStack2.Children.Clear;
+                        myStack2.Children.Clear();
+
                         foreach (var item in Constans.aktQuestion.choices)
                         {
+                            string kisbetus2 = item.ToLower();
+                            //Debug.WriteLine(kisbetus2);
+                            //Debug.WriteLine(kisbetus2.IndexOf(kisbetus));
+                            if (kisbetus2.IndexOf(kisbetus) >= 0)
+                            {
+                                RadioButton button = new RadioButton();
+                                button.Text = item;
+                                //button.HorizontalOptions = LayoutOptions.Start;
+                                //button.FontSize = "Large";
+                                button.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+                                button.BackgroundColor = Color.Transparent;
+                                int padding = Convert.ToInt16(Constans.ScreenWidth / 7);
+                                button.Padding = new Thickness(padding, 0, padding, 0);
+                                listCheckbox.Add(button);
+                                //button.IsVisible = false;
+                                //button.Opacity = 1;
+                                button.CheckedChange += Button_CheckedChange;
+                                myStack2.Children.Add(button);
+                            }
+
                             
 
                         }

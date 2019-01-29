@@ -20,6 +20,15 @@ namespace adatGyujtoX.Controls
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     ((RadioButton)bindable).textLabel.Text = (string)newValue;
+                    if (((string)newValue).Length == 0)
+                    {
+                        ((RadioButton)bindable).textLabel.IsVisible = false;
+
+                    }
+                    else
+                    {
+                        ((RadioButton)bindable).textLabel.IsVisible = true;
+                    }
                 }
                 );
         public static readonly BindableProperty FontSizeProperty =

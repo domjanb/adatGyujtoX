@@ -50,7 +50,14 @@ namespace adatGyujtoX.Fregments
             {
                 Navigation.PushModalAsync(new FSzurRadio());
             }
-
+            else if (Constans.aktQuestion.question_type == "TablesRadio")
+            {
+                Navigation.PushModalAsync(new FTablesRadio());
+            }
+            else if (Constans.aktQuestion.question_type == "Checkboxes")
+            {
+                Navigation.PushModalAsync(new FCheckBox());
+            }
             //break;
         }
     }
