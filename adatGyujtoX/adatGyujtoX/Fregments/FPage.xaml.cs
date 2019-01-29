@@ -56,7 +56,7 @@ namespace adatGyujtoX.Fregments
             }
             else if (Constans.aktQuestion.question_type == "Checkboxes")
             {
-                Navigation.PushModalAsync(new FCheckBox());
+                Navigation.PushModalAsync(new FCheckBox() );
             }
             //break;
         }
