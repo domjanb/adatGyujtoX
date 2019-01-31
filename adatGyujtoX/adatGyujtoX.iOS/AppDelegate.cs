@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using adatGyujtoX.Modell;
 using Foundation;
+using LabelHtml.Forms.Plugin.iOS;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using UIKit;
@@ -30,16 +31,8 @@ namespace adatGyujtoX.iOS
             LoadApplication(new App());
             //Downloaded();
             Constans.myZipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-            #region For Screen Height & Width
-
-            /*Constans.ScreenWidth = App.DisplayWidth;
-            Constans.ScreenHeight = App.DisplayHeight;*/
-            //App.SetScreenDimensions((int)UIScreen.MainScreen.Bounds.Height, (int)UIScreen.MainScreen.Bounds.Width);
-
-
-            //Constans.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
-            //Constans.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
-            #endregion
+            HtmlLabelRenderer.Initialize();
+            global::Xamarin.Forms.Forms.Init();
             return base.FinishedLaunching(app, options);
 
         }

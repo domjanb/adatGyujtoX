@@ -19,6 +19,7 @@ namespace adatGyujtoX.Fregments
         public FGombok ()
 		{
 			InitializeComponent ();
+            myLayout.Margin = new Thickness(10, 0, 10, 0);
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myStack.VerticalOptions = LayoutOptions.FillAndExpand;
@@ -29,6 +30,7 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
             //myLayout.Children.Add(kerdes);
 

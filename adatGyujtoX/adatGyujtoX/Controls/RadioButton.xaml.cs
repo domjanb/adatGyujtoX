@@ -52,10 +52,48 @@ namespace adatGyujtoX.Controls
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
                     ((RadioButton)bindable).boxLabel.Text = (bool)newValue ? "⚫" : "⚪";
-                ((RadioButton)bindable).CheckedChange?.Invoke(((RadioButton)bindable), (bool)newValue);
+                    
+                    ((RadioButton)bindable).CheckedChange?.Invoke(((RadioButton)bindable), (bool)newValue);
                 }
                 );
+        
+        
+        
         public event EventHandler<bool> CheckedChange;
+        
+        public bool _myIschecked;
+        public bool myIschecked
+        {
+            get { return _myIschecked; }
+            set
+            {
+                this._myIschecked = value;
+                boxLabel.Text = (bool)_myIschecked ? "⚫" : "⚪"; 
+                //CheckedChange?.Invoke(this, (bool)_myIschecked);
+
+                //myFrame.BackgroundColor = _myIschecked ? Color.White : Color.Aqua;
+                //myFrame.CornerRadius = _myIschecked ? 0 : 20;
+            }
+
+        }
+
+        public bool _enModositok;
+        public bool enModositok
+        {
+            get { return _enModositok; }
+            set
+            {
+                this._enModositok = value;
+                //boxLabel.Text = (bool)_myIschecked ? "⚫" : "⚪";
+                //CheckedChange?.Invoke(this, (bool)_myIschecked);
+
+                //myFrame.BackgroundColor = _myIschecked ? Color.White : Color.Aqua;
+                //myFrame.CornerRadius = _myIschecked ? 0 : 20;
+            }
+
+        }
+
+
         public RadioButton ()
 		{
 			InitializeComponent ();
@@ -78,6 +116,15 @@ namespace adatGyujtoX.Controls
         void OnCheckBoxTapped(object sender, EventArgs args)
         {
             IsChecked = !IsChecked;
+            if (!_enModositok)
+            {
+                CheckedChange?.Invoke(this, IsChecked);
+            }
+            //_myIschecked = !_myIschecked;
+            //IsChecked =_myIschecked  ;
+            //boxLabel.Text = (bool)_myIschecked ? "⚫" : "⚪";
+            
         }
+        
     }
 }

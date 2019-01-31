@@ -31,6 +31,7 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
 
             uzeno.Text = "";
@@ -153,6 +154,23 @@ namespace adatGyujtoX.Fregments
         {
             //throw new NotImplementedException();
             Debug.WriteLine("volt nyomi");
+            ((RadioButton)sender).enModositok = true;
+            int idx = 0;
+            foreach (var item in listCheckbox)
+            {
+                idx++;
+                if (item.Id == ((RadioButton)sender).Id)
+                {
+                    item.myIschecked = true;
+                }
+                else
+                {
+                    item.myIschecked = false;
+                }
+
+            }
+            ((RadioButton)sender).enModositok = false;
+            Debug.WriteLine("Nyomi:" + ((RadioButton)sender).Text);
         }
         private void _Continue_Clicked(object sender, EventArgs e)
         {

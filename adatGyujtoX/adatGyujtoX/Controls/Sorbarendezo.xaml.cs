@@ -10,16 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace adatGyujtoX.Controls
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Checkbox : ContentView
+	public partial class Sorbarendezo  : ContentView
 	{
         public static readonly BindableProperty TextProprty =
             BindableProperty.Create(
                 "Text",
                 typeof(string),
-                typeof(Checkbox),
-                propertyChanged: (bindable,oldValue,newValue) => 
+                typeof(Sorbarendezo),
+                propertyChanged: (bindable, oldValue, newValue) =>
                 {
-                    ((Checkbox)bindable).textLabel.Text = (string)newValue;
+                    ((Sorbarendezo)bindable).textLabel.Text = (string)newValue;
                 }
                 );
         public static readonly BindableProperty TextOtherProprty =
@@ -32,30 +32,41 @@ namespace adatGyujtoX.Controls
                     //((Sorbarendezo)bindable).textOther. .textLabel.Text = (string)newValue;
                 }
                 );
+        public static readonly BindableProperty SorszamProprty =
+            BindableProperty.Create(
+                "SorszamText",
+                typeof(string),
+                typeof(Sorbarendezo),
+                propertyChanged: (bindable, oldValue, newValue) =>
+                {
+                    ((Sorbarendezo)bindable).sorszamLabel.Text = (string)newValue;
+                }
+                );
         public static readonly BindableProperty FontSizeProperty =
             BindableProperty.Create(
                 "FontSize",
                 typeof(double),
-                typeof(Checkbox),
+                typeof(Sorbarendezo),
                 Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
-                    ((Checkbox)bindable).textLabel.FontSize = (double)newValue;
-                    ((Checkbox)bindable).boxLabel.FontSize = (double)newValue;
+                    ((Sorbarendezo)bindable).textLabel.FontSize = (double)newValue;
+                    ((Sorbarendezo)bindable).sorszamLabel.FontSize = (double)newValue;
+                    ((Sorbarendezo)bindable).textOther.FontSize = (double)newValue;
                 }
                 );
         public static readonly BindableProperty IsCheckedProperty =
             BindableProperty.Create(
                 "IsChecked",
                 typeof(bool),
-                typeof(Checkbox),
+                typeof(Sorbarendezo),
                 false,
                 propertyChanged: (bindable, oldValue, newValue) =>
                 {
-                    Checkbox checkbox = (Checkbox)bindable;
-                    ((Checkbox)bindable).boxLabel.Text = (bool)newValue ? "\u2611" : "\u2610";
-                    //checkbox.CheckedChanged?.Invoke(checkbox, (bool)newValue);
-                    ((Checkbox)bindable).CheckedChange?.Invoke(checkbox, (bool)newValue);
+                    //((Gomb)bindable).boxLabel.Text = (bool)newValue ? "" : "";
+                    //((Gomb)bindable).myFrame.BackgroundColor = (bool)newValue ? Color.White : Color.Aqua;
+                    //((Gomb)bindable).myFrame.CornerRadius = (bool)newValue ? 0 : 20;
+                    ((Sorbarendezo)bindable).CheckedChange?.Invoke(((Sorbarendezo)bindable), (bool)newValue);
                 }
                 );
         public static readonly BindableProperty KellOtherProperty =
@@ -69,16 +80,16 @@ namespace adatGyujtoX.Controls
                     //((Gomb)bindable).boxLabel.Text = (bool)newValue ? "" : "";
                     //((Gomb)bindable).myFrame.BackgroundColor = (bool)newValue ? Color.White : Color.Aqua;
                     //((Gomb)bindable).myFrame.CornerRadius = (bool)newValue ? 0 : 20;
-                    ((Checkbox)bindable).CheckedChange?.Invoke(((Checkbox)bindable), (bool)newValue);
+                    ((Sorbarendezo)bindable).CheckedChange?.Invoke(((Sorbarendezo)bindable), (bool)newValue);
                 }
                 );
 
+
         public event EventHandler<bool> CheckedChange;
         public event EventHandler<TextChangedEventArgs> EntryChange;
-        public Checkbox ()
+        public Sorbarendezo ()
 		{
 			InitializeComponent ();
-            
 		}
         public bool _KellEOther;
         public bool KellEOther
@@ -94,6 +105,19 @@ namespace adatGyujtoX.Controls
             }
 
         }
+        public bool _myIschecked;
+        public bool myIschecked
+        {
+            get { return _myIschecked; }
+            set
+            {
+                this._myIschecked = value;
+                //myFrame.BackgroundColor = _myIschecked ? Color.White : Color.Aqua;
+                myFrame.CornerRadius = _myIschecked ? 0 : 20;
+                sorszamLabel.IsVisible = _myIschecked ? true : false;
+            }
+
+        }
         public string Text
         {
             set { SetValue(TextProprty, value); }
@@ -103,6 +127,11 @@ namespace adatGyujtoX.Controls
         {
             set { SetValue(TextOtherProprty, value); }
             get { return (string)textOther.Text; }
+        }
+        public string SorszamText
+        {
+            set { SetValue(SorszamProprty, value); }
+            get { return (string)GetValue(SorszamProprty); }
         }
         public double FontSize
         {
@@ -114,10 +143,12 @@ namespace adatGyujtoX.Controls
             set { SetValue(IsCheckedProperty, value); }
             get { return (bool)GetValue(IsCheckedProperty); }
         }
+        
         void OnCheckBoxTapped(object sender, EventArgs args)
         {
             IsChecked = !IsChecked;
         }
+
         private void TextOther_TextChanged(object sender, TextChangedEventArgs e)
         {
             EntryChange?.Invoke(this, e);

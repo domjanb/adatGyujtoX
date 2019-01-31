@@ -2,6 +2,7 @@
 using adatGyujtoX.Modell;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace adatGyujtoX.Fregments
 		public FTablesRadio ()
 		{
 			InitializeComponent ();
+            myLayout.Margin = new Thickness(10, 0, 10, 0);
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myScroll.Content = myStack;
@@ -25,9 +27,10 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
 
-            var darab = 4;
+            /*var darab = 4;
             TablesRadio tablesSor = new TablesRadio
             {
                 Text = "1subidubisuiuu",
@@ -54,13 +57,15 @@ namespace adatGyujtoX.Fregments
             tablesSor4.Text = "4subidubisuiuu";
             tablesSor4.ValaszDB = darab;
             tablesSor4.BackgroundColor = Color.AntiqueWhite;
-            myStack.Children.Add(tablesSor4);
+            myStack.Children.Add(tablesSor4);*/
 
             var idx = 0;
             foreach (var item in Constans.aktQuestion.items)
             {
                 idx++;
                 TablesRadio button = new TablesRadio();
+                button.ValaszDB = Constans.aktQuestion.choices.Count();
+                button.CheckedChange += button_CheckedChange;
                 button.Text = item;
 
                 //button.FontSize = "Large";
@@ -71,7 +76,7 @@ namespace adatGyujtoX.Fregments
                 }
                 else
                 {
-                    tablesSor2.BackgroundColor = Color.AntiqueWhite;
+                    button.BackgroundColor = Color.AntiqueWhite;
                 }
 
                 //listCheckbox.Add(button);
@@ -81,10 +86,15 @@ namespace adatGyujtoX.Fregments
             }
             myLayout.Children.Add(myScroll);
         }
-        private void Button_CheckedChange(object sender, bool e)
+
+        private void button_CheckedChange(object sender, int e)
         {
             //throw new NotImplementedException();
+            Debug.WriteLine("Nyomi:" + ((TablesRadio)sender).Text + Convert.ToString(e));
+
         }
+
+        
         private void _Continue_Clicked(object sender, EventArgs e)
         {
 

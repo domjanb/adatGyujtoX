@@ -16,6 +16,7 @@ namespace adatGyujtoX.Fregments
 		public FNumbers ()
 		{
 			InitializeComponent ();
+            myLayout.Margin = new Thickness(10, 0, 10, 0);
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myScroll.Content = myStack;
@@ -24,6 +25,7 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
 
             Entry lblDuma = new Entry();

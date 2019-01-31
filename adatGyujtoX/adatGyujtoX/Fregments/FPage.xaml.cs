@@ -44,7 +44,7 @@ namespace adatGyujtoX.Fregments
             }
             else if (Constans.aktQuestion.question_type == "SzurRadio2")
             {
-                Navigation.PushModalAsync(new FSzurRadio2());
+                Navigation.PushModalAsync(new FSzurCheckbox2());
             }
             else if (Constans.aktQuestion.question_type == "SzurRadio")
             {
@@ -57,6 +57,10 @@ namespace adatGyujtoX.Fregments
             else if (Constans.aktQuestion.question_type == "Checkboxes")
             {
                 Navigation.PushModalAsync(new FCheckBox() );
+            }
+            else if (Constans.aktQuestion.question_type == "SorbaRendezo")
+            {
+                Navigation.PushModalAsync(new FSorbarendezo());
             }
             //break;
         }

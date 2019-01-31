@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LabelHtml.Forms.Plugin.UWP;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -29,6 +31,7 @@ namespace adatGyujtoX.UWP
         public App()
         {
             this.InitializeComponent();
+            
             this.Suspending += OnSuspending;
         }
 
@@ -40,7 +43,9 @@ namespace adatGyujtoX.UWP
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-
+            //var rendererAssemblies = new[] { typeof(HtmlLabelRenderer).GetTypeInfo().Assembly };
+            //Xamarin.Forms.Forms.Init(e, rendererAssemblies);
+            HtmlLabelRenderer.Initialize();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

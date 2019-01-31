@@ -19,7 +19,7 @@ namespace adatGyujtoX.Fregments
         public FKepes()
 		{
 			InitializeComponent ();
-
+            myLayout.Margin = new Thickness(10, 0, 10, 0);
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
             myScroll.Content = myStack;
@@ -28,6 +28,7 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title+ "beee";
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
             
             int itemDb = Constans.aktQuestion.choices.Count;

@@ -19,6 +19,7 @@ using Android.Support.V4.Content;
 using System.Security;
 using Java.Security;
 using Android.Support.V4.App;
+using LabelHtml.Forms.Plugin.Droid;
 
 namespace adatGyujtoX.Droid
 {
@@ -33,6 +34,9 @@ namespace adatGyujtoX.Droid
             base.OnCreate(savedInstanceState);
             //Downloaded();
             Constans.myZipPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
+            HtmlLabelRenderer.Initialize();
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

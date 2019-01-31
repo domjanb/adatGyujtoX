@@ -13,13 +13,11 @@ using Xamarin.Forms.Xaml;
 namespace adatGyujtoX.Fregments
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class FSzurRadio2 : ContentPage
+	public partial class FSzurCheckbox2 : ContentPage
 	{
         List<Checkbox> listCheckbox = new List<Checkbox>();
-        //List<Constans.myCheckbox> listCheckbox = new List<Constans.myCheckbox>();
-        //public static Dictionary<string, Checkbox> myCheckbox = new Dictionary<string, Checkbox>();
         public static List<Tuple<string, Checkbox>> myCheckbox = new List<Tuple<string, Checkbox>>();
-        public FSzurRadio2 ()
+        public FSzurCheckbox2 ()
 		{
 			InitializeComponent ();
             myLayout.Margin = new Thickness(10, 0, 10, 0);
@@ -37,7 +35,7 @@ namespace adatGyujtoX.Fregments
             string csoport = "";
             foreach (var item in Constans.aktQuestion.choices)
             {
-                var kotojelPos=item.IndexOf("-");
+                var kotojelPos = item.IndexOf("-");
                 if (csoportositoE(item))
                 {
                     Kinyilo nyilo = new Kinyilo();
@@ -59,7 +57,7 @@ namespace adatGyujtoX.Fregments
                     listCheckbox.Add(button);
                     //myCheckbox.Add(csoport, button);
                     myCheckbox.Add(Tuple.Create(csoport, button));
-                    
+
                     //button.Opacity = 1;
                     button.CheckedChange += Button_CheckedChange;
                     button.IsVisible = false;
@@ -73,7 +71,7 @@ namespace adatGyujtoX.Fregments
         private void nyilo_CheckedChange(object sender, bool e)
         {
             Kinyilo kinyilo = (Kinyilo)sender;
-            foreach(var item in myCheckbox)
+            foreach (var item in myCheckbox)
             {
                 if (item.Item1 == kinyilo.Text)
                 {
@@ -86,19 +84,19 @@ namespace adatGyujtoX.Fregments
                         item.Item2.IsVisible = false;
                     }
                 }
-                
+
             }
             //throw new NotImplementedException();
-            
+
         }
 
         private void Button_CheckedChange(object sender, bool e)
         {
-            foreach(var item in listCheckbox)
+            foreach (var item in listCheckbox)
             {
                 if (item.IsChecked)
                 {
-                    
+
                     Debug.WriteLine(((Checkbox)item).Text);
                 }
             }
@@ -124,7 +122,7 @@ namespace adatGyujtoX.Fregments
             }
 
 
-                return vissza;
+            return vissza;
         }
         public struct CheckboxTomb
         {

@@ -21,10 +21,11 @@ namespace adatGyujtoX.Fregments
         public Fkepes2 ()
 		{
 			InitializeComponent ();
+            myLayout.Margin = new Thickness(10, 0, 10, 0);
             var myScroll = new ScrollView();
             var myStack = new StackLayout();
-            myStack.VerticalOptions = LayoutOptions.FillAndExpand;
-            myStack.HorizontalOptions = LayoutOptions.FillAndExpand;
+            //myStack.VerticalOptions = LayoutOptions.FillAndExpand;
+            //myStack.HorizontalOptions = LayoutOptions.FillAndExpand;
             //myStack.Padding = new Thickness(21, 20, 20, 20);
             //myStack.Margin = new Thickness(20, 20, 20, 20);
             myScroll.Content = myStack;
@@ -33,6 +34,7 @@ namespace adatGyujtoX.Fregments
 
             Label kerdes = new Label();
             kerdes.Text = Constans.aktQuestion.question_title;
+            kerdes.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
             myStack.Children.Add(kerdes);
 
             /*StackLayout mostSl = new StackLayout();
@@ -40,9 +42,9 @@ namespace adatGyujtoX.Fregments
             mostSl.VerticalOptions = LayoutOptions.Fill;
             mostSl.Padding = new Thickness(1, 1, 1, 1);
             mostSl.Margin = new Thickness(1, 1, 1, 1);*/
-            string duma = "other";
+            //string duma = "other";
 
-            MyImageButton button = new MyImageButton();
+            /*MyImageButton button = new MyImageButton();
             string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
             button.Source = ImageSource.FromFile(ffile);
             int padding = Convert.ToInt16(Constans.ScreenWidth / 7 / 2);
@@ -58,9 +60,9 @@ namespace adatGyujtoX.Fregments
             //listButtons.Add(button);
             //mostSl.Children.Add(button);
             myStack.Children.Add(button);
-            myLayout.Children.Add(myScroll);
+            myLayout.Children.Add(myScroll);*/
 
-            /*int itemDb = Constans.aktQuestion.choices.Count;
+            int itemDb = Constans.aktQuestion.choices.Count;
 
             //var lt = new Constans.LayoutTomb();
             for (var i = 0; i < itemDb / 2; i++)
@@ -153,7 +155,7 @@ namespace adatGyujtoX.Fregments
                 
             }
             //myStack.Children.Add(regForm2);
-            myLayout.Children.Add(myScroll);*/
+            myLayout.Children.Add(myScroll);
         }
         private void button_Clicked(object sender, EventArgs e)
         {
