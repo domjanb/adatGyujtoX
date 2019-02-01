@@ -11,6 +11,10 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Nyelvek\resour.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Nyelvek\resources.en-US.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Nyelvek\resources.hu-HU.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Nyelvek\resources.resx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -124,6 +128,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\TokenDatabaseController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)myDataBase\UsersDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TranslateExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Survey.xaml.cs">
       <DependentUpon>Survey.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -266,5 +271,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Nyelvek\Resources1.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Nyelvek\resources.en.resw" />
   </ItemGroup>
 </Project>

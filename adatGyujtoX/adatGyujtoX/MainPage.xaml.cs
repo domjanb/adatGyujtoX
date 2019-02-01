@@ -38,7 +38,12 @@ namespace adatGyujtoX
         
         //private Button[] buttons;
         List<Button> listOfButtons = new List<Button>();
-       
+
+        
+        protected override bool OnBackButtonPressed()
+        {
+            return base.OnBackButtonPressed();
+        }
         public MainPage()
         {
 

@@ -16,6 +16,7 @@ namespace adatGyujtoX.Fregments
 	public partial class FCheckBox : ContentPage
 	{
         List<Checkbox> listCheckbox = new List<Checkbox>();
+        
         public FCheckBox ()
 		{
 			InitializeComponent ();

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using System.Globalization;
+using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Linq;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace adatGyujtoX
@@ -25,7 +28,7 @@ namespace adatGyujtoX
         public App()
         {
             //InitializeComponent();
-
+            //TResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             MainPage = new MainPage();
         }
 

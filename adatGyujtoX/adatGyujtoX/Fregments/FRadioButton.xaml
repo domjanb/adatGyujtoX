@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="adatGyujtoX.Fregments.FRadioButton">
+             x:Class="adatGyujtoX.Fregments.FRadioButton"
+             xmlns:translate="clr-namespace:adatGyujtoX.Helpers"
+             >
     <ContentPage.Content>
         <StackLayout  >
             <StackLayout VerticalOptions="StartAndExpand">
@@ -23,7 +25,7 @@
             <StackLayout Orientation="Horizontal"
              VerticalOptions="EndAndExpand">
                 <Button x:Name="_Back" IsVisible="False" Text="Back"  HorizontalOptions="Center" Grid.Column="0" />
-                <Button x:Name="_Continue"  Text="Continue" HorizontalOptions="CenterAndExpand" Grid.Column="1" Clicked="_Continue_Clicked"/>
+                <Button x:Name="_Continue"  Text="{translate:TranslateExtension String1}" HorizontalOptions="CenterAndExpand" Grid.Column="1" Clicked="_Continue_Clicked"/>
 
             </StackLayout>
         </StackLayout>

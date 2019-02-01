@@ -112,7 +112,7 @@ namespace adatGyujtoX.Fregments
                 string ffile = Path.Combine(Constans.myFilePath, duma.ToLower() + "_logo.png");
                 button.Source = ImageSource.FromFile(ffile);
                 int padding = Convert.ToInt16(Constans.ScreenWidth / 7/2);
-                button.Padding = new Thickness(0, 0, 0, 0);
+                button.Padding = new Thickness(0, 10, 0, 10);
                 //button.Aspect = Aspect.AspectFill;
 
                 button.VerticalOptions = LayoutOptions.FillAndExpand;

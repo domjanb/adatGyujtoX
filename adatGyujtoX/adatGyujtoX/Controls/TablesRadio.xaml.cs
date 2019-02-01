@@ -98,8 +98,9 @@ namespace adatGyujtoX.Controls
                 bwTop2.GestureRecognizers.Add(gr);
                 listGr.Add(bwTop2);
                 //bw.VerticalOptions = LayoutOptions.Fill;
-                sor.Children.Add(bwTop2, i + 1, 0);
+                
                 sor.Children.Add(rb, i + 1, 0);
+                sor.Children.Add(bwTop2, i + 1, 0);
             }
 
             myLayout.Children.Add(sor);
